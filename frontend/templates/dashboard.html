@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Your bookmarks</h1>
+<div id="cards" class="row row-cols-1 row-cols-md-2 g-4"></div>
+
+<!-- Modal -->
+<div class="modal fade" id="createModal" tabindex="-1">
+  <div class="modal-dialog">
+    <form id="createForm" class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Save Facebook Post</h5>
+        <button class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <label>Post URL</label>
+        <input id="postUrl" class="form-control" type="url" required>
+        <label class="mt-2">Notes</label>
+        <textarea id="postNotes" class="form-control"></textarea>
+        <label class="mt-2">Tags (comma separated)</label>
+        <input id="postTags" class="form-control">
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" type="submit">Save</button>
+        <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

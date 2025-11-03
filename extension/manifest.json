@@ -1,0 +1,18 @@
+{
+  "manifest_version": 3,
+  "name": "FB Notes Capture",
+  "version": "1.0",
+  "permissions": ["activeTab","scripting","storage"],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://*.facebook.com/*"],
+      "js": ["content_script.js"]
+    }
+  ]
+}
