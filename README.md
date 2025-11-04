@@ -239,7 +239,7 @@ Name: Emmanuel Rotich
 
 Socials	Link
 
-<img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/x.svg" width="15" color="white"/> X (Twitter):	https://twitter.com/mikemanuu
+<img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/x.svg" width="15" color="white"/> [Follow me on X(Twitter)](https://twitter.com/mikemanuu)
 
 <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" width="15" color="white"/> LinkedIn:	https://linkedin.com/in/rotich-emmanuel-14a25188
 
