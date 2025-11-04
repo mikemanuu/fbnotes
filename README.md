@@ -239,10 +239,14 @@ Name: Emmanuel Rotich
 
 Socials	Link
 
-<img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/x.svg" width="20"/> X (Twitter)	twitter.com/mikemanuu
-<img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" width="20"/> LinkedIn	linkedin.com/in/yourprofile
-<img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/github.svg" width="20"/> GitHub	github.com/mikemanuu
-<img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg" width="20"/> Facebook	facebook.com/yourprofile
+<img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/x.svg" width="20"/> X (Twitter)	https://twitter.com/mikemanuu
+
+<img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" width="20"/> LinkedIn	https://linkedin.com/in/yourprofile
+
+<img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/github.svg" width="20"/> GitHub	https://github.com/mikemanuu
+
+<img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg" width="20"/> Facebook	https://facebook.com/yourprofile
+
 📧 Email	rotichemmanuel273@gmail.com
 
 
