@@ -234,21 +234,20 @@ Licensed under the MIT License © 2025 Emmanuel Rotich
 ---
 
 ## 👨‍💻 Developer
-```
+
 Name: Emmanuel Rotich
 
 Socials	Link
 
-<img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/x.svg" width="20"/> X (Twitter)	twitter.com/yourhandle
+<img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/x.svg" width="20"/> X (Twitter)	twitter.com/mikemanuu
 <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" width="20"/> LinkedIn	linkedin.com/in/yourprofile
-<img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/github.svg" width="20"/> GitHub	github.com/yourusername
+<img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/github.svg" width="20"/> GitHub	github.com/mikemanuu
 <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg" width="20"/> Facebook	facebook.com/yourprofile
-📧 Email	yourname@email.com
+📧 Email	rotichemmanuel273@gmail.com
 
-```
 
 ---
-```
-Built with passion, persistence, and Python 🐍
-```
+
+### Built with passion, persistence, and Python 🐍
+
 ---
