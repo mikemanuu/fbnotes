@@ -110,9 +110,9 @@ All endpoints use *JWT (JSON Web Token)* authentication for secure access.
 ```bash
 git clone https://github.com/mikemanuu/fbnotes.git
 cd fbnotes
-
-2. Create environment variables
-
+```
+### 2. *Create environment variables*
+```
 Copy .env.example to .env and fill in:
 
 MYSQL_DB=fbnotes_db
@@ -121,29 +121,30 @@ MYSQL_PASSWORD=yourpassword
 MYSQL_HOST=db
 SECRET_KEY=your_django_secret
 DEBUG=True
+```
 
-3. Run Docker containers
-
+### 3. *Run Docker containers*
+```
 docker-compose build
 docker-compose up -d
-
-4. Apply database migrations
-
+```
+### 4. *Apply database migrations*
+```
 docker-compose exec web python manage.py migrate
-
-5. Create superuser
-
+```
+### 5. *Create superuser*
+```
 docker-compose exec web python manage.py createsuperuser
-
-6. Access the app
-
+```
+### 6. *Access the app*
+```
 Visit http://localhost to open the web interface.
-
+```
 
 ---
 
-🧠 How It Works
-
+## 🧠 How It Works
+```
 1. User logs in or registers
 The authentication system validates credentials and returns a JWT token.
 
@@ -163,13 +164,13 @@ Screenshots or files are uploaded via /api/media/ and linked to the bookmark.
 5. Audit logging
 Every change (create, update, delete) is recorded automatically in AuditLog.
 
-
+```
 
 
 ---
 
-🏗 Architecture Diagram (Text Version)
-
+## 🏗 Architecture Diagram (Text Version)
+```
 [Browser Extension / Web UI]
           |
           v
@@ -178,20 +179,20 @@ Every change (create, update, delete) is recorded automatically in AuditLog.
           v
        [MySQL DB]
 
-
+```
 ---
 
-🧪 Testing
-
+## 🧪 Testing
+```
 To run tests inside Docker:
 
 docker-compose exec web python manage.py test
 
-
+```
 ---
 
-🔒 Security Practices
-
+## 🔒 Security Practices
+```
 Environment variables stored in .env
 
 CSRF protection enabled
@@ -202,12 +203,12 @@ Validation for file uploads
 
 HTTPS recommended in production
 
-
+```
 
 ---
 
-📦 Deployment (Production)
-
+## 📦 Deployment (Production)
+```
 Use the provided Docker Compose configuration:
 
 docker-compose -f docker-compose.prod.yml build
@@ -221,19 +222,19 @@ MySQL database
 
 Nginx as a reverse proxy
 
-
+```
 
 ---
 
-📄 License
-
+## 📄 License
+```
 Licensed under the MIT License © 2025 Emmanuel Rotich
-
+```
 
 ---
 
-👨‍💻 Developer
-
+## 👨‍💻 Developer
+```
 Name: Emmanuel Rotich
 
 Socials	Link
@@ -244,10 +245,10 @@ Socials	Link
 <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg" width="20"/> Facebook	facebook.com/yourprofile
 📧 Email	yourname@email.com
 
-
+```
 
 ---
-
+```
 Built with passion, persistence, and Python 🐍
-
+```
 ---
