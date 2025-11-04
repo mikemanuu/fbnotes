@@ -241,11 +241,11 @@ Socials	Link
 
 <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/x.svg" width="15" color="white"/> [Follow me on X(Twitter)](https://twitter.com/mikemanuu)
 
-<img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" width="15" color="white"/> LinkedIn:	https://linkedin.com/in/rotich-emmanuel-14a25188
+<img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" width="15" color="white"/> [Connect with me on LinkedIn](https://linkedin.com/in/rotich-emmanuel-14a25188)
 
-<img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/github.svg" width="15" color="white"/> GitHub:	https://github.com/mikemanuu
+<img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/github.svg" width="15" color="white"/> [Check my GitHub account](https://github.com/mikemanuu)
 
-📧 Email:	rotichemmanuel273@gmail.com
+📧 [Email me](rotichemmanuel273@gmail.com)
 
 
 ---
