@@ -241,13 +241,9 @@ Socials	Link
 
 <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/x.svg" width="15" color="white"/> X (Twitter):	https://twitter.com/mikemanuu
 
-<img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" width="15" color="white"/> LinkedIn:	https://linkedin.com/in/yourprofile
+<img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" width="15" color="white"/> LinkedIn:	https://linkedin.com/in/rotich-emmanuel-14a25188
 
 <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/github.svg" width="15" color="white"/> GitHub:	https://github.com/mikemanuu
-
-<img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg" width="15" color="white"/> Facebook:	https://facebook.com/yourprofile
-
-<img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/mail.svg" width="15" color="white"/> Email:	rotichemmanuel273@gmail.com
 
 📧 Email:	rotichemmanuel273@gmail.com
 
