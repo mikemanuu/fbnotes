@@ -239,13 +239,13 @@ Name: Emmanuel Rotich
 
 Socials	Link
 
-<img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/x.svg" width="20"/> X (Twitter)	https://twitter.com/mikemanuu
+<img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/x.svg" width="15" color="white"/> X (Twitter)	https://twitter.com/mikemanuu
 
-<img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" width="20"/> LinkedIn	https://linkedin.com/in/yourprofile
+<img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" width="15" color="white"/> LinkedIn	https://linkedin.com/in/yourprofile
 
-<img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/github.svg" width="20"/> GitHub	https://github.com/mikemanuu
+<img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/github.svg" width="15" color="white"/> GitHub	(Check my GitHub Profile[https://github.com/mikemanuu])
 
-<img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg" width="20"/> Facebook	https://facebook.com/yourprofile
+<img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg" width="15" color="white"/> Facebook	https://facebook.com/yourprofile
 
 📧 Email	rotichemmanuel273@gmail.com
 
