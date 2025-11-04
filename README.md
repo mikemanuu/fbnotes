@@ -1,3 +1,4 @@
+
 ---
 
 # 📘 fbnotes
@@ -107,7 +108,7 @@ All endpoints use *JWT (JSON Web Token)* authentication for secure access.
 
 ### 1. *Clone the repository*
 ```bash
-git clone https://github.com/yourusername/fbnotes.git
+git clone https://github.com/mikemanuu/fbnotes.git
 cd fbnotes
 
 2. Create environment variables
