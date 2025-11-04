@@ -12,6 +12,8 @@ venv/
 
 # Docker
 *.env
+*.dockerignore
+*.env.production
 *.pyc
 *.egg-info
 docker-compose.override.yml

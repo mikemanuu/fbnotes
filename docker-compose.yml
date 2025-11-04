@@ -1,3 +1,5 @@
+version: "3.9"
+
 services:
   db:
     image: mysql:8.0
@@ -5,33 +7,45 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: fb_notes_db
-      MYSQL_USER: fbuser
-      MYSQL_PASSWORD: fbpass
+      MYSQL_DATABASE: fbnotes_db
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
     ports:
       - "3306:3306"
     volumes:
-      - db_data:/var/lib/mysql
-    networks:
-      - fbnotes_network
+      - mysql_data:/var/lib/mysql
+    #networks:
+      #- fbnotes_network
 
-  web:
-    build: .
-    container_name: fbnotes_web
+  django:
+    build:
+      context:  .
+      dockerfile: Dockerfile
+    container_name: fbnotes_django
     command: python manage.py runserver 0.0.0.0:8000
+             #python manage.py makemigrations &&
+             #python manage.py migrate &&
+             #python manage.py runserver 0.0.0.0:8000
     volumes:
       - ./project:/app
     ports:
       - "8000:8000"
+
+    #working_dir: /app
+
     depends_on:
       - db
     environment:
-      - DJANGO_SETTINGS_MODULE=project.settings
+      DB_NAME: fbnotes_db
+      DB_USER: fbuser
+      DB_PASSWORD: fbpass
+      DB_HOST: db
+      DB_PORT: 3306
     networks:
       - fbnotes_network
 
 volumes:
-  db_data:
+  mysql_data:
 
 networks:
   fbnotes_network:
