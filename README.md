@@ -247,7 +247,7 @@ Socials	Link
 
 <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg" width="15" color="white"/> Facebook:	https://facebook.com/yourprofile
 
-<img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/email.svg" width="15" color="white"/> Email:	rotichemmanuel273@gmail.com
+<img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/mail.svg" width="15" color="white"/> Email:	rotichemmanuel273@gmail.com
 
 📧 Email:	rotichemmanuel273@gmail.com
 
