@@ -241,7 +241,7 @@ Socials	Link
 
 <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/x.svg" width="15" color="white"/> [Follow me on X(Twitter)](https://twitter.com/mikemanuu)
 
-<img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" width="15" color="white"/> [Connect with me on LinkedIn](https://www.linkedin.com/in/rotich-emmanuel-14a25188)
+<img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" width="15" color="white"/> [Connect with me on LinkedIn](https://www.linkedin.com/in/rotich-emmanuel-14ba25188?utm_source=share_via&utm_content=profile&utm_medium=member_android)
 
 <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/github.svg" width="15" color="white"/> [Check my GitHub account](https://github.com/mikemanuu)
 
