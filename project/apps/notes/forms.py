@@ -4,4 +4,5 @@ from .models import Note
 class NoteForm(forms.ModelForm):
     class Meta:
         model = Note
-        fields = ['title', 'content', 'tags']
+        fields = ["bookmark", "title", "content"]
+        widgets = {"content": forms.Textarea(attrs={"rows": 6})}

@@ -1,7 +1,7 @@
 from django.db import models
 from django.conf import settings
 import hashlib
-from ..tags.models import Tag
+from apps.tags.models import Tag
 
 def compute_url_hash(url: str) -> str:
     return hashlib.sha256(url.encode('utf-8')).hexdigest()

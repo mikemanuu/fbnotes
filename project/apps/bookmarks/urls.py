@@ -3,8 +3,8 @@ from rest_framework.routers import DefaultRouter
 from .views import BookmarkViewSet
 
 router = DefaultRouter()
-router.register(r'bookmarks', BookmarkViewSet, basename='bookmarks')
+router.register(r"", BookmarkViewSet, basename="bookmarks")
 
 urlpatterns = [
-    path('', include(router.urls)),
+    path("", include(router.urls)),
 ]

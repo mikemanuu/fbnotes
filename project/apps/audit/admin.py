@@ -3,5 +3,6 @@ from .models import AuditLog
 
 @admin.register(AuditLog)
 class AuditLogAdmin(admin.ModelAdmin):
-    list_display = ('id','action','target_model','target_id','user','created_at')
-    readonly_fields = ('user','action','target_model','target_id','meta','created_at')
+    list_display = ("id", "user", "action", "created_at")
+    list_filter = ("user",)
+    search_fields = ("action",)

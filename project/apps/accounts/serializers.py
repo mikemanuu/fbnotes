@@ -1,26 +1,33 @@
 from rest_framework import serializers
-from .models import User
+from django.contrib.auth import get_user_model
 from django.contrib.auth.password_validation import validate_password
 
-class RegisterSerializer(serializers.ModelSerializer):
-    password = serializers.CharField(write_only=True, required=True, validators=[validate_password])
-    class Meta:
-        model = User
-        fields = ('id','username','email','password','display_name','bio')
+User = get_user_model()
 
-    def create(self, validated_data):
-        user = User.objects.create(
-            username=validated_data['username'],
-            email=validated_data.get('email',''),
-            display_name=validated_data.get('display_name',''),
-            bio=validated_data.get('bio',''),
-        )
-        user.set_password(validated_data['password'])
-        user.save()
-        return user
 
 class UserSerializer(serializers.ModelSerializer):
+    """Serializer for reading user data."""
     class Meta:
         model = User
-        fields = ('id','username','email','display_name','bio','created_at')
-        read_only_fields = ('id','created_at')
+        fields = ['id', 'username', 'email', 'first_name', 'last_name', 'profile_photo']
+        read_only_fields = ['id']
+
+
+class RegisterSerializer(serializers.ModelSerializer):
+    """Serializer for registering new users with password validation."""
+    password = serializers.CharField(write_only=True, required=True, validators=[validate_password])
+    password2 = serializers.CharField(write_only=True, required=True)
+
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password', 'password2', 'first_name', 'last_name', 'profile_photo']
+
+    def validate(self, attrs):
+        if attrs['password'] != attrs['password2']:
+            raise serializers.ValidationError({"password": "Passwords do not match."})
+        return attrs
+
+    def create(self, validated_data):
+        validated_data.pop('password2')
+        user = User.objects.create_user(**validated_data)
+        return user

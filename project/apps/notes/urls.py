@@ -1,12 +1,10 @@
-from django.urls import path
-from .views import NoteListCreateAPIView, NoteDetailAPIView, NoteDashboardView, create_note_view, delete_note_view
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from .views import NoteViewSet
 
-app_name = 'notes'
+router = DefaultRouter()
+router.register(r"", NoteViewSet, basename="notes")
 
 urlpatterns = [
-    path('api/notes/', NoteListCreateAPIView.as_view(), name='note-list-create'),
-    path('api/notes/<int:pk>/', NoteDetailAPIView.as_view(), name='note-detail'),
-    path('dashboard/', NoteDashboardView.as_view(), name='dashboard'),
-    path('create/<int:bookmark_id>/', create_note_view, name='create-note'),
-    path('delete/<int:note_id>/', delete_note_view, name='delete-note'),
+    path("", include(router.urls)),
 ]

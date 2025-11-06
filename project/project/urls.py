@@ -1,13 +1,15 @@
 from django.contrib import admin
 from django.urls import path, include
-from django.views.generic import TemplateView
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('api/v1/', include('apps.accounts.urls')),
-    path('api/v1/', include('apps.bookmarks.urls')),
-    path('api/v1/', include('apps.notes.urls')),
-    path('api/v1/', include('apps.tags.urls')),
-    path('api/v1/', include('apps.audit.urls')),
-    path('', TemplateView.as_view(template_name='dashboard.html'), name='home'),
+    path("admin/", admin.site.urls),
+
+    path("api/bookmarks/", include("apps.bookmarks.urls")),
+    path("api/notes/", include("apps.notes.urls")),
+    path("api/tags/", include("apps.tags.urls")),
+    path("api/accounts/", include("apps.accounts.urls")),
+    path("api/audit/", include("apps.audit.urls")),
+
+    # DRF browsable auth (session login)
+    path("api-auth/", include("rest_framework.urls")),
 ]
