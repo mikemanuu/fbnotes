@@ -1,0 +1,4 @@
+/* style.css - minimal customizations */
+body { background: #f8f9fa; }
+.card { border: 0; }
+.card .card-body h5 { margin-bottom: .5rem; }

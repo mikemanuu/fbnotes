@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Notes — FB Notes</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+ <nav class="navbar navbar-expand-lg navbar-light bg-light px-3">
+  <a class="navbar-brand fw-bold" href="notes.html">FB Notes</a>
+
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="mainNavbar">
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <li class="nav-item">
+        <a class="nav-link" href="bookmarks.html">Bookmarks</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="notes.html">Notes</a>
+      </li>
+    </ul>
+
+    <div class="d-flex align-items-center gap-2">
+      <div id="user-info" class="d-flex align-items-center fw-semibold"></div>
+      <button id="logout-btn" class="btn btn-outline-dark btn-sm">Logout</button>
+    </div>
+  </div>
+  <style>
+  #user-info img {
+    object-fit: cover;
+    border: 1px solid #ddd;
+  }
+</style>
+
+</nav>
+
+
+  <div class="container py-4">
+    <h3>Your notes</h3>
+    <div id="notes-list" class="row gy-3"></div>
+  </div>
+  <div id="navbar"></div>
+<script type="module" src="./js/navbar.js"></script>
+
+  <script type="module">
+    
+    import { getAccessToken, apiFetch } from './js/utils.js';
+    import { logoutLocal } from './js/auth.js';
+    import { ensureAuthenticated } from './js/authGuard.js';
+
+    await ensureAuthenticated();
+
+    fetch("navbar.html")
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById("navbar-container").innerHTML = data;
+    });
+
+    // ensure token
+    if (!localStorage.getItem('fb_access')) {
+      window.location.href = 'login.html';
+    }
+
+    document.getElementById('logoutBtn').addEventListener('click', () => {
+      logoutLocal('/');
+    });
+
+    async function loadNotes() {
+      try {
+        const data = await apiFetch('/notes/');
+        const container = document.getElementById('notes-list');
+        container.innerHTML = '';
+        if (!data.length) {
+          container.innerHTML = '<p class="text-muted">No notes yet.</p>';
+          return;
+        }
+        data.forEach(note => {
+          const col = document.createElement('div');
+          col.className = 'col-12';
+          col.innerHTML = `
+            <div class="card">
+              <div class="card-body">
+                <h5>${note.title || 'Untitled'}</h5>
+                <p class="mb-0">${note.content || ''}</p>
+                <small class="text-muted">Bookmark: ${note.bookmark || 'N/A'}</small>
+              </div>
+            </div>
+          `;
+          container.appendChild(col);
+        });
+      } catch (err) {
+        console.error(err);
+        if (err.status === 401) {
+          window.location.href = 'login.html';
+        } else {
+          document.getElementById('notes-list').innerText = 'Failed to load notes.';
+        }
+      }
+    }
+
+    loadNotes();
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script type="module" src="./navbar.js"></script>
+
+
+</body>
+</html>
