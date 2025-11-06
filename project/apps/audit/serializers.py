@@ -4,5 +4,5 @@ from .models import AuditLog
 class AuditLogSerializer(serializers.ModelSerializer):
     class Meta:
         model = AuditLog
-        fields = ["id", "user", "action", "timestamp", "bookmark"]
-        read_only_fields = ["id", "timestamp", "user"]
+        fields = ["id", "user", "action", "created_at", "target_model"]
+        read_only_fields = ["id", "created_at", "user"]

@@ -9,8 +9,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv(os.path.join(BASE_DIR, '.env'))
 
 SECRET_KEY = os.getenv('SECRET_KEY', 'change-me')
-DEBUG = os.getenv('DEBUG', 'False') == 'True'
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost').split(',')
+DEBUG = os.getenv('DEBUG', 'True') == 'True'
+ALLOWED_HOSTS = ['*']        #os.getenv('ALLOWED_HOSTS', 'localhost').split(',')
 
 
 INSTALLED_APPS = [
@@ -22,9 +22,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework_simplejwt',
+    'rest_framework_simplejwt.token_blacklist',
     'corsheaders',
     'drf_yasg',
     'django_filters',
+    'drf_spectacular',
     # apps
     'apps.accounts',
     'apps.bookmarks',
@@ -70,7 +72,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': os.getenv('DATABASE_NAME', 'fbnotes_db'),
         'USER': os.getenv('DATABASE_USER', 'root'),
-        'PASSWORD': os.getenv('DATABASE_PASSWORD'),
+        'PASSWORD': os.getenv('DATABASE_PASSWORD', 'DATABASE_PASSWORD'),
         'HOST': os.getenv('DATABASE_HOST', '127.0.0.1'),
         'PORT': os.getenv('DATABASE_PORT', '3306'),
         'OPTIONS': {
@@ -103,10 +105,24 @@ REST_FRAMEWORK = {
     ),
 }
 
+REST_FRAMEWORK.update({
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+})
+# drf-spectacular settings:
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'FB Notes API',
+    'DESCRIPTION': 'API for bookmarking and notes app',
+    'VERSION': '1.0.0',
+}
+
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
     'SIGNING_KEY': os.getenv('SIMPLE_JWT_SECRET_KEY', 'change-this'),
+    "ROTATE_REFRESH_TOKENS": False,
+    "BLACKLIST_AFTER_ROTATION": False,   # set True if using rotate + blacklist
+    "AUTH_HEADER_TYPES": ("Bearer",),
 }
 
 # Static

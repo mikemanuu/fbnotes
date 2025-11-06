@@ -19,6 +19,7 @@ class Bookmark(models.Model):
     visibility = models.CharField(max_length=20, choices=VISIBILITY_CHOICES, default='private')
     archived = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now_add=True)
     tags = models.ManyToManyField(Tag, through='BookmarkTag', related_name='bookmarks')
 
     class Meta:

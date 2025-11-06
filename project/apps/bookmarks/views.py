@@ -6,6 +6,7 @@ from .serializers import BookmarkSerializer
 from apps.tags.models import Tag
 from apps.notes.serializers import NoteSerializer
 from apps.notes.models import Note
+from django.shortcuts import get_object_or_404
 
 class BookmarkViewSet(viewsets.ModelViewSet):
     serializer_class = BookmarkSerializer
