@@ -7,15 +7,22 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light px-3">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm px-3">
   <a class="navbar-brand fw-bold" href="notes.html">FB Notes</a>
-
-  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-bs-toggle="collapse"
+    data-bs-target="#navbarNav"
+    aria-controls="navbarNav"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div class="collapse navbar-collapse" id="mainNavbar">
-    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+  <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+    <ul class="navbar-nav">
       <li class="nav-item">
         <a class="nav-link" href="bookmarks.html">Bookmarks</a>
       </li>
@@ -24,20 +31,37 @@
       </li>
     </ul>
 
-    <div class="d-flex align-items-center gap-2">
-      <div id="user-info" class="d-flex align-items-center fw-semibold"></div>
-      <button id="logout-btn" class="btn btn-outline-dark btn-sm">Logout</button>
+    <div class="d-flex align-items-center gap-3">
+      <!-- User Dropdown -->
+      <div class="dropdown" id="user-dropdown">
+        <a
+          class="d-flex align-items-center text-decoration-none dropdown-toggle"
+          href="#"
+          role="button"
+          id="userDropdownMenu"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          <img
+            id="user-avatar"
+            src=""
+            alt="Profile"
+            class="rounded-circle me-2"
+            width="36"
+            height="36"
+          />
+          <span id="username" class="fw-semibold text-secondary"></span>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdownMenu">
+          <li><a class="dropdown-item" href="#">Profile</a></li>
+          <li><a class="dropdown-item" href="#">Settings</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item text-danger" href="#" id="logout-btn">Logout</a></li>
+        </ul>
+      </div>
     </div>
   </div>
-  <style>
-  #user-info img {
-    object-fit: cover;
-    border: 1px solid #ddd;
-  }
-</style>
-
 </nav>
-
 
   <div class="container py-4">
     <h3>Your bookmarks</h3>
@@ -96,7 +120,7 @@
     loadBookmarks();
   </script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script type="module" src="./navbar.js"></script>
+  <script type="module" src="./js/navbar.js"></script>
 
 
 </body>

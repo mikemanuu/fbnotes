@@ -2,3 +2,28 @@
 body { background: #f8f9fa; }
 .card { border: 0; }
 .card .card-body h5 { margin-bottom: .5rem; }
+
+#user-avatar {
+  object-fit: cover;
+  border: 2px solid #ddd;
+  transition: border-color 0.2s;
+}
+
+#user-avatar:hover {
+  border-color: #888;
+}
+
+#username {
+  font-size: 0.95rem;
+  color: #333;
+}
+
+
+.navbar .dropdown-menu {
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  right: auto;
+}
+
+
+

@@ -1,36 +1,25 @@
 // navbar.js
-import { apiFetch } from './js/utils.js';
-import { logoutLocal } from './js/auth.js';
+import { apiFetch, logoutLocal } from './utils.js';
 
-async function loadUserInfo() {
+async function loadUser() {
   try {
     const user = await apiFetch('/accounts/me/');
-    const infoDiv = document.getElementById('user-info');
+    const username = document.getElementById('username');
+    const avatar = document.getElementById('user-avatar');
 
-    if (!user) {
-      infoDiv.textContent = 'Guest';
-      return;
-    }
-
-    let html = '';
-    if (user.profile_photo) {
-      html += `<img src="${user.profile_photo}" alt="profile" class="rounded-circle me-2" width="32" height="32">`;
-    }
-    html += `<span>${user.username}</span>`;
-    infoDiv.innerHTML = html;
-
+    username.textContent = user.username;
+    avatar.src = user.profile_photo
+      ? user.profile_photo
+      : 'https://via.placeholder.com/36?text=U'; // fallback avatar
   } catch (err) {
-    console.error('Failed to load user info:', err);
-    if (err.status === 401) {
-      logoutLocal('login.html');
-    }
+    console.error('User info fetch failed:', err);
   }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  loadUser();
+
   const logoutBtn = document.getElementById('logout-btn');
-  if (logoutBtn) {
-    logoutBtn.addEventListener('click', () => logoutLocal());
-  }
-  loadUserInfo();
+  if (logoutBtn) logoutBtn.addEventListener('click', () => logoutLocal());
 });
+
