@@ -1,0 +1,87 @@
+<!--?xml version="1.0" encoding="UTF-8"?-->
+<svg width="800" height="500" viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Notes page mock">
+  <defs>
+    <linearGradient id="gNotes" x1="0" x2="1">
+      <stop offset="0" stop-color="#07203a"></stop>
+      <stop offset="1" stop-color="#0db1a9"></stop>
+    </linearGradient>
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="#061018" flood-opacity="0.08"></feDropShadow>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect rx="12" ry="12" width="100%" height="100%" fill="#fff" stroke="#edf2f7"></rect>
+
+  <!-- Top bar -->
+  <rect x="0" y="0" width="800" height="64" rx="12" ry="12" fill="url(#gNotes)"></rect>
+  <text x="24" y="40" font-family="system-ui, Roboto, Arial" font-size="20" fill="#fff" font-weight="700">fbnotes</text>
+
+  <!-- Sidebar -->
+  <g transform="translate(24,84)">
+    <rect width="200" height="380" rx="10" ry="10" fill="#f8fafc" stroke="#e9eef6" filter="url(#shadow)"></rect>
+    <text x="18" y="28" font-family="system-ui" font-size="14" fill="#07203a" font-weight="600">My Notebooks</text>
+
+    <g transform="translate(18,50)" font-family="system-ui" font-size="13" fill="#07203a">
+      <text y="20">📘 General Notes</text>
+      <text y="48" fill="#0db1a9">📗 Tech Ideas</text>
+      <text y="76">📙 Personal</text>
+      <text y="104">📕 Work</text>
+    </g>
+  </g>
+
+  <!-- Main area -->
+  <g transform="translate(248,84)">
+    <!-- Search bar -->
+    <rect x="0" y="0" width="528" height="44" rx="8" ry="8" fill="#fff" stroke="#eef2f6"></rect>
+    <text x="12" y="28" font-family="system-ui" font-size="13" fill="#6c757d">Search notes...</text>
+
+    <!-- Toolbar -->
+    <g transform="translate(0,60)">
+      <rect width="528" height="40" rx="8" ry="8" fill="#f8fafc" stroke="#eef2f6"></rect>
+      <text x="16" y="26" font-family="system-ui" font-size="13" fill="#07203a">Sort by:</text>
+      <rect x="70" y="10" width="90" height="22" rx="6" ry="6" fill="#0db1a9"></rect>
+      <text x="115" y="26" text-anchor="middle" font-family="system-ui" font-size="12" fill="#fff">Newest</text>
+
+      <rect x="174" y="10" width="90" height="22" rx="6" ry="6" fill="#fff" stroke="#eef2f6"></rect>
+      <text x="219" y="26" text-anchor="middle" font-family="system-ui" font-size="12" fill="#07203a">Oldest</text>
+    </g>
+
+    <!-- Notes grid -->
+    <g transform="translate(0,116)">
+      <!-- note card 1 -->
+      <rect width="252" height="140" rx="10" ry="10" fill="#fff" stroke="#eef2f6"></rect>
+      <text x="14" y="28" font-family="system-ui" font-size="14" fill="#07203a" font-weight="600">New API Ideas</text>
+      <text x="14" y="50" font-family="system-ui" font-size="12" fill="#6c757d">Updated 2 days ago</text>
+      <rect x="14" y="72" width="90" height="26" rx="6" ry="6" fill="#0db1a9"></rect>
+      <text x="59" y="90" font-size="12" fill="#fff" text-anchor="middle">Open</text>
+
+      <!-- note card 2 -->
+      <g transform="translate(276,0)">
+        <rect width="252" height="140" rx="10" ry="10" fill="#fff" stroke="#eef2f6"></rect>
+        <text x="14" y="28" font-family="system-ui" font-size="14" fill="#07203a" font-weight="600">Django Setup Steps</text>
+        <text x="14" y="50" font-family="system-ui" font-size="12" fill="#6c757d">Updated 1 week ago</text>
+        <rect x="14" y="72" width="90" height="26" rx="6" ry="6" fill="#ff6b6b"></rect>
+        <text x="59" y="90" font-size="12" fill="#fff" text-anchor="middle">Open</text>
+      </g>
+
+      <!-- note card 3 -->
+      <g transform="translate(0,160)">
+        <rect width="252" height="140" rx="10" ry="10" fill="#fff" stroke="#eef2f6"></rect>
+        <text x="14" y="28" font-family="system-ui" font-size="14" fill="#07203a" font-weight="600">UI/UX Notes</text>
+        <text x="14" y="50" font-family="system-ui" font-size="12" fill="#6c757d">Updated yesterday</text>
+        <rect x="14" y="72" width="90" height="26" rx="6" ry="6" fill="#0db1a9"></rect>
+        <text x="59" y="90" font-size="12" fill="#fff" text-anchor="middle">Open</text>
+      </g>
+
+      <!-- note card 4 -->
+      <g transform="translate(276,160)">
+        <rect width="252" height="140" rx="10" ry="10" fill="#fff" stroke="#eef2f6"></rect>
+        <text x="14" y="28" font-family="system-ui" font-size="14" fill="#07203a" font-weight="600">Personal Goals</text>
+        <text x="14" y="50" font-family="system-ui" font-size="12" fill="#6c757d">Updated 3 days ago</text>
+        <rect x="14" y="72" width="90" height="26" rx="6" ry="6" fill="#0db1a9"></rect>
+        <text x="59" y="90" font-size="12" fill="#fff" text-anchor="middle">Open</text>
+      </g>
+    </g>
+  </g>
+</svg>

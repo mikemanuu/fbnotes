@@ -1,0 +1,79 @@
+<!--?xml version="1.0" encoding="UTF-8"?-->
+<svg width="800" height="500" viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Dashboard mock">
+  <defs>
+    <linearGradient id="g1" x1="0" x2="1">
+      <stop offset="0" stop-color="#07203a"></stop>
+      <stop offset="1" stop-color="#0db1a9"></stop>
+    </linearGradient>
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="6" stdDeviation="12" flood-color="#061018" flood-opacity="0.08"></feDropShadow>
+    </filter>
+  </defs>
+
+  <!-- Background frame -->
+  <rect rx="12" ry="12" width="100%" height="100%" fill="#fff" stroke="#e6eef8"></rect>
+
+  <!-- Top bar -->
+  <rect x="0" y="0" width="800" height="64" rx="12" ry="12" fill="url(#g1)"></rect>
+  <text x="24" y="40" font-family="system-ui, Roboto, Arial" font-size="20" fill="#fff" font-weight="700">fbnotes</text>
+
+  <!-- Left column: stats -->
+  <g transform="translate(24,84)">
+    <rect width="220" height="380" rx="10" ry="10" fill="#f8fafc" stroke="#e9eef6" filter="url(#shadow)"></rect>
+    <text x="18" y="28" font-family="system-ui" font-size="14" fill="#07203a" font-weight="600">Quick stats</text>
+
+    <!-- stat items -->
+    <g transform="translate(18,50)" font-family="system-ui">
+      <rect width="184" height="46" rx="8" ry="8" fill="#fff" stroke="#eef2f6"></rect>
+      <text x="16" y="30" font-size="13" fill="#07203a">Bookmarks</text>
+      <text x="140" y="30" font-size="13" fill="#0db1a9" text-anchor="end" font-weight="700">128</text>
+
+      <rect y="62" width="184" height="46" rx="8" ry="8" fill="#fff" stroke="#eef2f6"></rect>
+      <text x="16" y="94" font-size="13" fill="#07203a">Notes</text>
+      <text x="140" y="94" font-size="13" fill="#ff6b6b" text-anchor="end" font-weight="700">39</text>
+
+      <rect y="124" width="184" height="46" rx="8" ry="8" fill="#fff" stroke="#eef2f6"></rect>
+      <text x="16" y="156" font-size="13" fill="#07203a">Tags</text>
+      <text x="140" y="156" font-size="13" fill="#07203a" text-anchor="end" font-weight="700">24</text>
+    </g>
+  </g>
+
+  <!-- Right column: main area -->
+  <g transform="translate(260,84)">
+    <!-- Search bar -->
+    <rect x="0" y="0" width="496" height="44" rx="8" ry="8" fill="#fff" stroke="#eef2f6"></rect>
+    <text x="12" y="28" font-family="system-ui" font-size="13" fill="#6c757d">Search bookmarks, notes...</text>
+
+    <!-- Card grid -->
+    <g transform="translate(0,64)">
+      <!-- card 1 -->
+      <rect x="0" y="0" width="240" height="110" rx="10" ry="10" fill="#fff" stroke="#eef2f6"></rect>
+      <text x="14" y="28" font-family="system-ui" font-size="14" fill="#07203a" font-weight="600">Saved: How to build with Django</text>
+      <text x="14" y="54" font-family="system-ui" font-size="12" fill="#6c757d">Notes: 2 • Tags: django, tutorial</text>
+      <rect x="14" y="68" width="90" height="26" rx="6" ry="6" fill="#0db1a9"></rect>
+      <text x="59" y="86" font-size="12" fill="#fff" text-anchor="middle">Open</text>
+
+      <!-- card 2 -->
+      <g transform="translate(256,0)">
+        <rect width="240" height="110" rx="10" ry="10" fill="#fff" stroke="#eef2f6"></rect>
+        <text x="14" y="28" font-family="system-ui" font-size="14" fill="#07203a" font-weight="600">FB Thread: UI tips</text>
+        <text x="14" y="54" font-family="system-ui" font-size="12" fill="#6c757d">Tags: design, css</text>
+        <rect x="14" y="68" width="90" height="26" rx="6" ry="6" fill="#ff6b6b"></rect>
+        <text x="59" y="86" font-size="12" fill="#fff" text-anchor="middle">Open</text>
+      </g>
+
+      <!-- list below -->
+      <g transform="translate(0,132)">
+        <rect width="496" height="132" rx="10" ry="10" fill="#fff" stroke="#eef2f6"></rect>
+        <!-- list items -->
+        <g font-family="system-ui" font-size="13" fill="#07203a">
+          <text x="16" y="26">• Post: Useful Docker tips</text>
+          <text x="16" y="52" font-size="12" fill="#6c757d">Saved: 2 days ago • Tags: docker, devops</text>
+
+          <text x="16" y="86">• Article: API testing with curl</text>
+          <text x="16" y="112" font-size="12" fill="#6c757d">Saved: 5 days ago • Tags: api, testing</text>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
