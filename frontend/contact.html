@@ -14,7 +14,7 @@
     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
 
     <link href="css/index.css" rel="stylesheet">
-
+  <script src="https://www.google.com/recaptcha/api.js?render=your_site_key_here"></script>
 </head>
 <body>
 
@@ -160,43 +160,49 @@
   </button>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-   <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
   <script>
     document.getElementById("copyYear").textContent = new Date().getFullYear();
 
     const form = document.getElementById('contactForm');
     const statusDiv = document.getElementById('formStatus');
 
-    form.addEventListener('submit', async (e) => {
+
+    form.addEventListener("submit", async (e) => {
       e.preventDefault();
       statusDiv.innerHTML = '<div class="text-muted">Sending...</div>';
 
-      const payload = {
-        name: form.name.value,
-        email: form.email.value,
-        subject: form.subject.value,
-        message: form.message.value
-      };
+      grecaptcha.ready(function () {
+        grecaptcha.execute("6Le2RgcsAAAAAOc2sYYslbo3MXggQxjLsKYCBogI", { action: "contact" }).then(async function (token) {
+          const payload = {
+            name: form.name.value,
+            email: form.email.value,
+            subject: form.subject.value,
+            message: form.message.value,
+            recaptcha_token: token
+          };
 
-      try {
-        const response = await fetch('/api/contact/', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
+          try {
+            const response = await fetch("/api/contact/", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(payload)
+            });
+
+            if (response.ok) {
+              statusDiv.innerHTML = '<div class="alert alert-success mt-3">Message sent successfully! 🎉</div>';
+              form.reset();
+            } else {
+              const err = await response.json();
+              statusDiv.innerHTML = `<div class="alert alert-danger mt-3">Error: ${JSON.stringify(err)}</div>`;
+            }
+          } catch (error) {
+            statusDiv.innerHTML = '<div class="alert alert-danger mt-3">Network error. Please try again.</div>';
+          }
         });
-
-        if (response.ok) {
-          statusDiv.innerHTML = '<div class="alert alert-success mt-3">Message sent successfully! 🎉</div>';
-          form.reset();
-        } else {
-          const err = await response.json();
-          statusDiv.innerHTML = `<div class="alert alert-danger mt-3">Error: ${JSON.stringify(err)}</div>`;
-        }
-      } catch (err) {
-        statusDiv.innerHTML = '<div class="alert alert-danger mt-3">Network error. Please try again.</div>';
-      }
+      });
     });
-
+  
     // AOS init
     AOS.init({ once: true, duration: 600 });
 
