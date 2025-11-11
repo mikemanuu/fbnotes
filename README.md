@@ -106,12 +106,12 @@ All endpoints use *JWT (JSON Web Token)* authentication for secure access.
 
 ## ⚙ Setup and Installation
 
-1. *Clone the repository*
+1. **Clone the repository**
 ```bash
 git clone https://github.com/mikemanuu/fbnotes.git
 cd fbnotes
 ```
-2. *Create environment variables*
+2. **Create environment variables**
 
 - Copy .env.example to .env and fill in:
 ```
@@ -123,20 +123,20 @@ SECRET_KEY=your_django_secret
 DEBUG=True
 ```
 
-3. *Run Docker containers*
+3. **Run Docker containers**
 ```
 docker-compose build
 docker-compose up -d
 ```
-4. *Apply database migrations*
+4. **Apply database migrations**
 ```
 docker-compose exec web python manage.py migrate
 ```
-5. *Create superuser*
+5. **Create superuser**
 ```
 docker-compose exec web python manage.py createsuperuser
 ```
-6. *Access the app*
+6. **Access the app**
 ```
 Visit http://localhost to open the web interface.
 ```
