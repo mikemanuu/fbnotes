@@ -145,30 +145,25 @@ Visit http://localhost to open the web interface.
 
 ## 🧠 How It Works
 
- 1. User logs in or registers
-```
-The authentication system validates credentials and returns a JWT token.
-```
+### 1. User logs in or registers
+
+- The authentication system validates credentials and returns a JWT token.
 
 ### 2. User saves a Facebook post
-```
-The frontend sends the post link and metadata to the /api/bookmarks/ endpoint.
-```
+
+- The frontend sends the post link and metadata to the /api/bookmarks/ endpoint.
 
 ### 3. Notes and Tags added
-```
-Notes are attached to a bookmark, and multiple tags can be applied for organization.
-```
+
+- Notes are attached to a bookmark, and multiple tags can be applied for organization.
 
 ### 4. Media uploaded
-```
-Screenshots or files are uploaded via /api/media/ and linked to the bookmark.
-```
+
+- Screenshots or files are uploaded via /api/media/ and linked to the bookmark.
 
 ### 5. Audit logging
-```
-Every change (create, update, delete) is recorded automatically in AuditLog.
-```
+
+- Every change (create, update, delete) is recorded automatically in AuditLog.
 
 
 ---
