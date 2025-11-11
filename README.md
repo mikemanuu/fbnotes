@@ -183,7 +183,7 @@ Visit http://localhost to open the web interface.
 
 ## 🧪 Testing
 
-### To run tests inside Docker:
+- To run tests inside Docker:
 ```
 docker-compose exec web python manage.py test
 
@@ -207,7 +207,7 @@ docker-compose exec web python manage.py test
 
 ## 📦 Deployment (Production)
 
-### Use the provided Docker Compose configuration:
+- Use the provided Docker Compose configuration:
 
 ```
 docker-compose -f docker-compose.prod.yml build
@@ -232,7 +232,7 @@ docker-compose -f docker-compose.prod.yml up -d
 
 ## 👨‍💻 Developer
 
-### - Name: Emmanuel Rotich
+- **Name: Emmanuel Rotich**
 
 - Social Links
 
