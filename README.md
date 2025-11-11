@@ -191,18 +191,17 @@ docker-compose exec web python manage.py test
 ---
 
 ## 🔒 Security Practices
-```
-Environment variables stored in .env
 
-CSRF protection enabled
+- Environment variables stored in .env
 
-JWT-based authentication
+- CSRF protection enabled
 
-Validation for file uploads
+- JWT-based authentication
 
-HTTPS recommended in production
+- Validation for file uploads
 
-```
+- HTTPS recommended in production
+
 
 ---
 
@@ -213,31 +212,29 @@ HTTPS recommended in production
 ```
 docker-compose -f docker-compose.prod.yml build
 docker-compose -f docker-compose.prod.yml up -d
-
-This runs:
-
-Django app via Gunicorn
-
-MySQL database
-
-Nginx as a reverse proxy
-
 ```
+ - This runs:
+
+- - Django app via Gunicorn
+
+- - MySQL database
+
+- - Nginx as a reverse proxy
 
 ---
 
 ## 📄 License
-```
-Licensed under the MIT License © 2025 Emmanuel Rotich
-```
+
+- Licensed under the MIT License © 2025 Emmanuel Rotich
+
 
 ---
 
 ## 👨‍💻 Developer
 
-Name: Emmanuel Rotich
+### - Name: Emmanuel Rotich
 
-Social Links
+- Social Links
 
 <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/x.svg" width="15" color="white"/> [Follow me on X(Twitter)](https://twitter.com/mikemanuu)
 
