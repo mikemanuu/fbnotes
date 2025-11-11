@@ -145,7 +145,7 @@ Visit http://localhost to open the web interface.
 
 ## 🧠 How It Works
 
-**1. User logs in or registers**
+       **1. User logs in or registers**
 
 - The authentication system validates credentials and returns a JWT token.
 
