@@ -45,8 +45,8 @@
     }
 
     .sidebar .nav-link.active, .sidebar .nav-link:hover {
-      background: #007bff;
-      color: #fff;
+       background: linear-gradient(to right, #007bff, #6610f2);
+       color: #fff;
     }
 
     /* Main content */
@@ -63,11 +63,15 @@
     }
 
     .card {
+      padding: 1rem;
       border: none;
       box-shadow: 0 1px 4px rgba(0,0,0,0.08);
-      border-radius: 10px;
+      border-radius: 12px;
       transition: transform 0.2s, background 0.3s, color 0.3s;
     }
+
+    .stats-card h6 { color: #666; font-size: 0.9rem; }
+    .stats-card h3 { font-size: 1.5rem; }
 
     .card:hover { transform: translateY(-4px); }
 
@@ -132,7 +136,8 @@
       .sidebar { transform: translateX(-100%); }
       .sidebar.show { transform: translateX(0); }
       .content { margin-left: 0; padding: 1rem; }
-      .bottom-nav { display: flex; }
+      .bottom-nav { display: flex; padding: 0.3rem 0;}
+      .bottom-nav div { font-size: 0.75rem; }
     }
   </style>
 </head>
@@ -177,7 +182,7 @@
             <li><a class="dropdown-item" href="#">Profile</a></li>
             <li><a class="dropdown-item" href="#">Settings</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item text-danger" href="#">Logout</a></li>
+            <li><a class="dropdown-item text-danger" href="index.html">Logout</a></li>
           </ul>
         </div>
       </div>
