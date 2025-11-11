@@ -112,9 +112,9 @@ git clone https://github.com/mikemanuu/fbnotes.git
 cd fbnotes
 ```
 ### 2. *Create environment variables*
-```
-Copy .env.example to .env and fill in:
 
+- Copy .env.example to .env and fill in:
+```
 MYSQL_DB=fbnotes_db
 MYSQL_USER=root
 MYSQL_PASSWORD=yourpassword
@@ -145,7 +145,7 @@ Visit http://localhost to open the web interface.
 
 ## 🧠 How It Works
 
-### 1. User logs in or registers
+ 1. User logs in or registers
 ```
 The authentication system validates credentials and returns a JWT token.
 ```
