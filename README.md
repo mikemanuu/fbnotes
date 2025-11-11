@@ -144,26 +144,30 @@ Visit http://localhost to open the web interface.
 ---
 
 ## 🧠 How It Works
+
+### 1. User logs in or registers
 ```
-1. User logs in or registers
 The authentication system validates credentials and returns a JWT token.
+```
 
-
-2. User saves a Facebook post
+### 2. User saves a Facebook post
+```
 The frontend sends the post link and metadata to the /api/bookmarks/ endpoint.
+```
 
-
-3. Notes and Tags added
+### 3. Notes and Tags added
+```
 Notes are attached to a bookmark, and multiple tags can be applied for organization.
+```
 
-
-4. Media uploaded
+### 4. Media uploaded
+```
 Screenshots or files are uploaded via /api/media/ and linked to the bookmark.
+```
 
-
-5. Audit logging
+### 5. Audit logging
+```
 Every change (create, update, delete) is recorded automatically in AuditLog.
-
 ```
 
 
@@ -183,9 +187,9 @@ Every change (create, update, delete) is recorded automatically in AuditLog.
 ---
 
 ## 🧪 Testing
-```
-To run tests inside Docker:
 
+### To run tests inside Docker:
+```
 docker-compose exec web python manage.py test
 
 ```
@@ -208,9 +212,10 @@ HTTPS recommended in production
 ---
 
 ## 📦 Deployment (Production)
-```
-Use the provided Docker Compose configuration:
 
+### Use the provided Docker Compose configuration:
+
+```
 docker-compose -f docker-compose.prod.yml build
 docker-compose -f docker-compose.prod.yml up -d
 
@@ -237,7 +242,7 @@ Licensed under the MIT License © 2025 Emmanuel Rotich
 
 Name: Emmanuel Rotich
 
-Socials	Link
+Social Links
 
 <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/x.svg" width="15" color="white"/> [Follow me on X(Twitter)](https://twitter.com/mikemanuu)
 
