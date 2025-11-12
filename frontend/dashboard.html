@@ -1,232 +1,631 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>fbnotes Dashboard</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Dashboard — fbnotes</title>
 
+  <!-- Bootstrap & Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-  <link href="css/dashboard.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
 
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js" defer></script>
+
+  <style>
+    :root {
+      --sidebar-width: 240px;
+      --accent-left: #00bfa6; /* teal */
+      --accent-right: #007bff; /* blue */
+      --gradient: linear-gradient(90deg, var(--accent-left), var(--accent-right));
+    }
+
+    html,body { height: 100%; }
+    body {
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: #f6f8fb;
+      margin: 0;
+      color: #111827;
+      transition: background-color .2s, color .2s;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: var(--sidebar-width);
+      height: 100vh;
+      position: fixed;
+      left: 0;
+      top: 0;
+      background: #fff;
+      border-right: 1px solid #e6e9ee;
+      padding: 1rem 0.75rem;
+      box-shadow: 0 6px 18px rgba(10, 10, 10, 0.03);
+      transition: transform .32s cubic-bezier(.2,.9,.3,1);
+      z-index: 1100;
+      overflow: auto;
+    }
+    .sidebar.hidden { transform: translateX(-110%); }
+
+    .sidebar .brand {
+      display:flex; align-items:center; justify-content:space-between; gap:.5rem;
+      padding:0 .5rem 1rem .5rem;
+    }
+    .sidebar .brand h4 { margin:0; color:var(--accent-right); font-weight:700; }
+    .sidebar .close-x {
+      background:none; border:none; font-size:1.25rem; color:#3b3f46; cursor:pointer;
+    }
+
+    .sidebar .nav-link {
+      color:#2b2f36; margin:.25rem 0; border-radius:.5rem; font-weight:500;
+      padding:.5rem .75rem; display:flex; align-items:center; gap:.6rem;
+    }
+    .sidebar .nav-link:hover, .sidebar .nav-link.active {
+      background: var(--gradient);
+      color:#fff;
+    }
+
+    /* Main content */
+    .main {
+      margin-left: var(--sidebar-width);
+      transition: margin-left .32s;
+      min-height: 100vh;
+      padding: 1.25rem;
+    }
+    .sidebar.hidden ~ .main { margin-left: 0; }
+
+    .topbar {
+      background: #fff; border-bottom:1px solid #eceef3;
+      padding: .6rem 1rem; border-radius: .5rem; display:flex; gap:1rem; align-items:center;
+      box-shadow: 0 2px 6px rgba(12,18,24,0.03);
+    }
+    .topbar .hamburger { display:inline-flex; gap:.5rem; align-items:center; border:none; background:none; font-size:1.1rem; cursor:pointer; }
+    .topbar .search { flex:1; max-width:540px; }
+    .topbar .controls { display:flex; gap:.5rem; align-items:center; }
+
+    /* cards */
+    .card { border-radius:12px; border:none; }
+    .stats-card { padding:1rem; }
+    .stats-card h6 { color:#6b7280; font-size:.9rem; margin:0; }
+    .stats-card h3 { margin:.35rem 0; font-size:1.6rem; }
+
+    /* Chart card */
+    .chart-card { padding:1rem; }
+
+    /* Activity table */
+    .activity-table thead th { font-weight:600; font-size:.9rem; color:#374151; background:transparent; border-bottom:1px solid #eef2f6; }
+    .activity-table tbody tr td { vertical-align: middle; padding:.65rem .75rem; }
+
+    /* Quick actions */
+    .quick-actions .btn { min-width:160px; padding:.55rem .9rem; border-radius:8px; }
+
+    /* Announcements */
+    .announcements li { margin-bottom:.5rem; }
+
+    /* Floating add button */
+    .fab {
+      position: fixed; right: 22px; bottom: 86px; width:56px; height:56px;
+      border-radius: 50%; display:flex; align-items:center; justify-content:center;
+      background: var(--gradient); color:#fff; border:none; box-shadow:0 8px 24px rgba(0,0,0,.12);
+      z-index:1200; cursor:pointer;
+    }
+
+    /* Bottom nav for mobile */
+    .bottom-nav { display:none; position:fixed; bottom:0; left:0; right:0; background:#fff; border-top:1px solid #e6e9ee; padding:.35rem .6rem; justify-content:space-around; z-index:1200; }
+    .bottom-nav a { color:#374151; font-size:.9rem; display:flex; flex-direction:column; align-items:center; gap:.2rem; text-decoration:none; }
+
+    /* dark theme */
+    body.dark { background: #0f1720; color:#e6eef6; }
+    body.dark .sidebar { background:#0b1220; border-color:#0f1720; }
+    body.dark .topbar { background:#071022; border-color:#0f1720; }
+    body.dark .card { background:#0b1220; color:#dbeafe; box-shadow:none; }
+    body.dark .activity-table thead th { color:#9fb2d9; }
+
+    /* responsiveness */
+    @media (max-width: 992px) {
+      .sidebar { transform: translateX(-110%); }
+      .sidebar.show { transform: translateX(0); }
+      .main { margin-left: 0; padding: .9rem; }
+      .bottom-nav { display:flex; }
+      .topbar .search { display:none; }
+    }
+  </style>
 </head>
 <body>
 
-  <!-- Sidebar -->
-  <div class="sidebar" id="sidebar">
-    <h4 class="text-primary mb-4 ps-3">fbnotes</h4>
-    <ul class="nav nav-pills flex-column mb-auto px-2">
-      <li><a href="#" class="nav-link active"><i class="bi bi-house-door me-2"></i>Dashboard</a></li>
-      <li><a href="#" class="nav-link"><i class="bi bi-bookmark me-2"></i>Saved Posts</a></li>
-      <li><a href="#" class="nav-link"><i class="bi bi-journal-text me-2"></i>Notes</a></li>
-      <li><a href="#" class="nav-link"><i class="bi bi-tags me-2"></i>Categories</a></li>
-      <li><a href="#" class="nav-link"><i class="bi bi-gear me-2"></i>Settings</a></li>
+  <!-- SIDEBAR -->
+  <nav class="sidebar" id="sidebar" aria-label="Sidebar">
+    <div class="brand">
+      <h4>fbnotes</h4>
+      <button class="close-x" id="closeSidebar" aria-label="Close sidebar">&times;</button>
+    </div>
+
+    <ul class="nav flex-column px-1">
+      <li class="nav-item"><a class="nav-link active" href="#"><i class="bi bi-house-door-fill"></i> Dashboard</a></li>
+      <li class="nav-item"><a class="nav-link" href="bookmarks.html"><i class="bi bi-bookmark"></i> Bookmarks</a></li>
+      <li class="nav-item"><a class="nav-link" href="notes.html"><i class="bi bi-journal-text"></i> Notes</a></li>
+      <li class="nav-item"><a class="nav-link" href="tags.html"><i class="bi bi-tags"></i> Tags</a></li>
+      <li class="nav-item"><a class="nav-link" href="profile.html"><i class="bi bi-person"></i> Profile</a></li>
     </ul>
-  </div>
 
-  <!-- Main Content -->
-  <div class="content">
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light mb-4">
-      <div class="container-fluid">
-        <button class="btn btn-outline-secondary d-lg-none me-2" id="sidebarToggle"><i class="bi bi-list"></i></button>
+  </nav>
 
-        <form class="d-flex me-auto">
-          <input class="form-control me-2" type="search" placeholder="Search notes..." aria-label="Search">
-          <button class="btn btn-outline-primary" type="submit"><i class="bi bi-search"></i></button>
-        </form>
+  <!-- MAIN -->
+  <main class="main" id="main">
+    <div class="topbar mb-3">
+      <button class="hamburger" id="openSidebar" aria-label="Open sidebar"><i class="bi bi-list"></i></button>
 
-        <!-- Dark Mode Toggle -->
-        <button class="btn btn-outline-secondary me-3" id="darkModeToggle" title="Toggle dark mode">
-          <i class="bi bi-moon"></i>
-        </button>
+      <div class="search input-group me-3">
+        <input id="globalSearch" class="form-control form-control-sm" placeholder="Search notes, bookmarks, tags..." aria-label="Search">
+        <button class="btn btn-sm btn-outline-primary" id="doSearch"><i class="bi bi-search"></i></button>
+      </div>
 
-        <!-- User Menu -->
+      <div class="controls ms-auto d-flex align-items-center gap-2">
+        <button class="btn btn-sm btn-outline-secondary" id="darkToggle" title="Toggle dark mode"><i class="bi bi-moon"></i></button>
         <div class="dropdown">
-          <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle" id="userMenu" data-bs-toggle="dropdown">
-            <img src="https://via.placeholder.com/40" alt="User" class="rounded-circle me-2">
-            <strong>John Doe</strong>
+          <a class="d-flex align-items-center text-decoration-none" href="#" id="navUser" data-bs-toggle="dropdown" aria-expanded="false">
+            <img id="navAvatar" src="https://via.placeholder.com/36" alt="avatar" class="rounded-circle me-2" width="36" height="36">
+            <strong id="navUsername">You</strong>
           </a>
-          <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="userMenu">
-            <li><a class="dropdown-item" href="#">Profile</a></li>
-            <li><a class="dropdown-item" href="#">Settings</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item text-danger" href="#">Logout</a></li>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" href="profile.html">Profile</a></li>
+            <li><a class="dropdown-item" href="#" id="logoutBtn">Logout</a></li>
           </ul>
         </div>
       </div>
-    </nav>
-
-    <!-- Analytics -->
-    <div class="row g-3 mb-4">
-      <div class="col-6 col-md-3">
-        <div class="card stats-card p-3">
-          <h6>Total Notes</h6>
-          <h3 class="fw-bold">2</h3>
-        </div>
-      </div>
-      <div class="col-6 col-md-3">
-        <div class="card stats-card p-3">
-          <h6>Saved Posts</h6>
-          <h3 class="fw-bold">5</h3>
-        </div>
-      </div>
-      <div class="col-6 col-md-3">
-        <div class="card stats-card p-3">
-          <h6>Categories</h6>
-          <h3 class="fw-bold">4</h3>
-        </div>
-      </div>
-      <div class="col-6 col-md-3">
-        <div class="card stats-card p-3">
-          <h6>Last Synced</h6>
-          <h3 class="fw-bold">11:00 am</h3>
-        </div>
-      </div>
     </div>
 
-    <!-- Chart -->
-    <div class="card p-3 mb-4">
-      <h5 class="mb-3">Notes Added (Last 7 Days)</h5>
-      <canvas id="notesChart" height="120"></canvas>
-    </div>
+    <div class="container-fluid p-0">
 
-    <!-- Filter -->
-    <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap">
-      <h5 class="mb-2 mb-md-0">Your Notes</h5>
-      <select class="form-select" style="width:200px" id="categoryFilter">
-        <option value="all">All Categories</option>
-        <option value="{{ cat.id }}">{{ cat.name }}</option>
-      </select>
-    </div>
-
-    <!-- Notes -->
-    <div class="row row-cols-1 row-cols-md-3 g-4" id="notesGrid">
-      <div class="col note-item" data-category="{{ note.category.id }}">
-        <div class="card h-100">
-          <div class="card-body">
-            <h5 class="card-title">{{ note.title }}</h5>
-            <p class="note-text">{{ note.text }}</p>
+      <!-- Overview stats -->
+      <div class="row g-3 mb-4">
+        <div class="col-6 col-md-3">
+          <div class="card stats-card">
+            <h6>Total Notes</h6>
+            <h3 id="metricNotes">—</h3>
           </div>
-          <div class="card-footer bg-white border-0 d-flex justify-content-between">
-            <small class="text-muted">Added on {{ note.created_at }}</small>
-            <div>
-              <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#noteModal" data-note-id="{{ note.id }}"><i class="bi bi-pencil"></i></button>
-              <button class="btn btn-sm btn-outline-danger" onclick="deleteNote({{ note.id }})"><i class="bi bi-trash"></i></button>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="card stats-card">
+            <h6>Saved Posts</h6>
+            <h3 id="metricBookmarks">—</h3>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="card stats-card">
+            <h6>Categories</h6>
+            <h3 id="metricCategories">—</h3>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="card stats-card">
+            <h6>Last Synced</h6>
+            <h3 id="metricSynced">—</h3>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chart -->
+      <div class="card chart-card mb-4">
+        <div class="card-body chart-card-inner">
+          <h5 class="mb-3">Notes added (last 7 days)</h5>
+          <canvas id="notesChart" height="100"></canvas>
+        </div>
+      </div>
+
+      <!-- Recent activity (table) + Quick actions + Announcements -->
+      <div class="row g-3">
+        <div class="col-lg-8">
+          <div class="card mb-3">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <h5 class="mb-0">Recent activity</h5>
+                <small class="text-muted">Latest actions from your account</small>
+              </div>
+              <div class="table-responsive">
+                <table class="table activity-table align-middle mb-0">
+                  <thead>
+                    <tr>
+                      <th style="width:1rem">#</th>
+                      <th>Action</th>
+                      <th>Details</th>
+                      <th style="width:180px">When</th>
+                    </tr>
+                  </thead>
+                  <tbody id="activityBody">
+                    <tr><td colspan="4" class="text-muted text-center py-4">Loading...</td></tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="d-flex justify-content-between align-items-center mt-3">
+                <small id="activityCount" class="text-muted">—</small>
+                <nav>
+                  <ul class="pagination pagination-sm mb-0" id="activityPager"></ul>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <!-- Quick actions -->
+          <div class="card mb-3 p-3 quick-actions">
+            <h6>Quick actions</h6>
+            <div class="d-grid gap-2 mt-2">
+              <button class="btn btn-primary" id="btnAddNote"><i class="bi bi-plus-lg me-2"></i>Add note</button>
+              <button class="btn btn-outline-primary" id="btnSavePost"><i class="bi bi-bookmark-plus me-2"></i>Save post</button>
+              <button class="btn btn-outline-secondary" id="btnManageTags"><i class="bi bi-tags me-2"></i>Manage categories</button>
+            </div>
+          </div>
+
+          <!-- Announcements -->
+          <div class="card mb-3 p-3">
+            <h6>What's new</h6>
+            <ul id="announcementsList" class="announcements small mb-0 mt-2">
+              <li class="text-muted">Loading announcements…</li>
+            </ul>
+          </div>
+
+          <!-- Sync status -->
+          <div class="card p-3">
+            <h6>Sync</h6>
+            <div class="d-flex align-items-center gap-2 mt-2">
+              <button id="btnSync" class="btn btn-sm btn-outline-primary">Sync now</button>
+              <small id="syncStatus" class="text-muted">Last: —</small>
             </div>
           </div>
         </div>
       </div>
+
+      <!-- Floating action button -->
+      <button class="fab" id="fabAdd" title="Quick add"><i class="bi bi-pencil-fill fs-5"></i></button>
     </div>
+  </main>
 
-    <!-- Add Note -->
-    <button class="btn btn-primary add-btn" data-bs-toggle="modal" data-bs-target="#noteModal"><i class="bi bi-plus"></i></button>
-  </div>
+  <!-- Mobile bottom nav -->
+  <nav class="bottom-nav d-lg-none">
+    <a href="#" class="text-center"><i class="bi bi-house-door"></i><div>Home</div></a>
+    <a href="bookmarks.html" class="text-center"><i class="bi bi-bookmark"></i><div>Saved</div></a>
+    <a href="notes.html" class="text-center"><i class="bi bi-journal-text"></i><div>Notes</div></a>
+    <a href="tags.html" class="text-center"><i class="bi bi-tags"></i><div>Tags</div></a>
+  </nav>
 
-  <!-- Bottom Navigation -->
-  <div class="bottom-nav">
-    <a href="#" class="active"><i class="bi bi-house-door"></i><div>Home</div></a>
-    <a href="#"><i class="bi bi-bookmark"></i><div>Saved</div></a>
-    <a href="#"><i class="bi bi-journal-text"></i><div>Notes</div></a>
-    <a href="#"><i class="bi bi-tags"></i><div>Tags</div></a>
-    <a href="#"><i class="bi bi-gear"></i><div>Settings</div></a>
-  </div>
-
-  <!-- Modal -->
-  <div class="modal fade" id="noteModal" tabindex="-1" aria-labelledby="noteModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <form class="modal-content" id="noteForm">
+  <!-- Add Note Modal (simplified) -->
+  <div class="modal fade" id="addNoteModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <form class="modal-content" id="addNoteForm">
         <div class="modal-header">
-          <h5 class="modal-title" id="noteModalLabel">Add Note</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          <h5 class="modal-title">Add note</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <div class="mb-3">
-            <label for="noteTitle" class="form-label">Post Title</label>
-            <input type="text" class="form-control" id="noteTitle" required>
+          <div class="mb-2">
+            <label class="form-label">Title</label>
+            <input id="noteTitle" class="form-control" required>
           </div>
-          <div class="mb-3">
-            <label for="noteText" class="form-label">Your Note</label>
-            <textarea class="form-control" id="noteText" rows="4" required></textarea>
+          <div class="mb-2">
+            <label class="form-label">Note</label>
+            <textarea id="noteBody" class="form-control" rows="4" required></textarea>
           </div>
-          <div class="mb-3">
-            <label for="noteCategory" class="form-label">Category</label>
-            <select class="form-select" id="noteCategory">
-              <option value="{{ cat.id }}">{{ cat.name }}</option>
+          <div class="mb-2">
+            <label class="form-label">Category</label>
+            <select id="noteCategorySelect" class="form-select">
+              <option value="">— Select —</option>
             </select>
           </div>
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-primary">Save Note</button>
+          <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Cancel</button>
+          <button class="btn btn-primary" id="saveNoteBtn" type="submit">Save</button>
         </div>
       </form>
     </div>
   </div>
 
+
+  <!-- Bootstrap JS bundle -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 
+  <!-- Dashboard scripts -->
   <script>
-    const sidebar = document.getElementById('sidebar');
-    const sidebarToggle = document.getElementById('sidebarToggle');
-    const toggleBtn = document.getElementById('darkModeToggle');
+  // ---------- small API + auth helpers ----------
+  function getAccessToken() {
+    return localStorage.getItem('fb_access'); // adapt if you store token under another key
+  }
 
-    sidebarToggle.addEventListener('click', () => sidebar.classList.toggle('show'));
+  function authHeaders() {
+    const t = getAccessToken();
+    return t ? { 'Authorization': 'Bearer ' + t } : {};
+  }
 
-    // Dark mode persistence
-    if (localStorage.getItem('darkMode') === 'true') {
-      document.body.classList.add('dark');
-      toggleBtn.querySelector('i').classList.replace('bi-moon', 'bi-sun');
+  async function apiFetch(path, opts = {}) {
+    const base = (location.origin + '/api').replace(/\/$/, ''); // e.g. http://127.0.0.1:8000/api
+    const url = path.startsWith('http') ? path : (base + (path.startsWith('/') ? path : '/' + path));
+    const headers = Object.assign({'Content-Type': 'application/json'}, authHeaders(), opts.headers || {});
+    const body = opts.body && headers['Content-Type'] === 'application/json' ? JSON.stringify(opts.body) : opts.body;
+    const res = await fetch(url, Object.assign({ credentials: 'same-origin', headers }, opts, { body }));
+    if (!res.ok) {
+      // Try to parse JSON error
+      let txt = await res.text();
+      try { txt = JSON.parse(txt); } catch(e) {}
+      const err = new Error('API Error: ' + res.status);
+      err.status = res.status; err.body = txt; throw err;
     }
+    if (res.status === 204) return null;
+    const ct = res.headers.get('content-type') || '';
+    return ct.includes('application/json') ? res.json() : res.text();
+  }
 
-    toggleBtn.addEventListener('click', () => {
-      document.body.classList.toggle('dark');
-      const isDark = document.body.classList.contains('dark');
-      localStorage.setItem('darkMode', isDark);
-      const icon = toggleBtn.querySelector('i');
-      icon.classList.toggle('bi-sun');
-      icon.classList.toggle('bi-moon');
-    });
+  // ---------- elements ----------
+  const sidebar = document.getElementById('sidebar');
+  const closeSidebarBtn = document.getElementById('closeSidebar');
+  const openSidebarBtn = document.getElementById('openSidebar');
+  const darkToggle = document.getElementById('darkToggle');
+  const metricNotes = document.getElementById('metricNotes');
+  const metricBookmarks = document.getElementById('metricBookmarks');
+  const metricCategories = document.getElementById('metricCategories');
+  const metricSynced = document.getElementById('metricSynced');
+  const activityBody = document.getElementById('activityBody');
+  const activityPager = document.getElementById('activityPager');
+  const activityCount = document.getElementById('activityCount');
+  const announcementsList = document.getElementById('announcementsList');
+  const notesChartEl = document.getElementById('notesChart');
+  const addNoteModal = new bootstrap.Modal(document.getElementById('addNoteModal'), { backdrop: 'static' });
+  const addNoteForm = document.getElementById('addNoteForm');
 
-    // Chart with gradient
-    const ctx = document.getElementById('notesChart');
-    if (ctx) {
-      const gradient = ctx.getContext('2d').createLinearGradient(0, 0, 0, 200);
-      gradient.addColorStop(0, '#007bff');
-      gradient.addColorStop(1, '#6610f2');
-      new Chart(ctx, {
+  // ---------- UI state ----------
+  let currentActivityPage = 1;
+  let lastActivityTotal = 0;
+  let notesChart = null;
+
+  // ---------- sidebar toggles ----------
+  openSidebarBtn.addEventListener('click', () => {
+    sidebar.classList.remove('hidden');
+    // on small screens, ensure visible class:
+    sidebar.classList.add('show');
+  });
+  closeSidebarBtn.addEventListener('click', () => {
+    sidebar.classList.add('hidden');
+    sidebar.classList.remove('show');
+  });
+
+  // ---------- dark mode persistence ----------
+  (function initDarkMode() {
+    const saved = localStorage.getItem('fb_dark') === 'true';
+    if (saved) document.body.classList.add('dark');
+    updateDarkIcon();
+  })();
+
+  darkToggle.addEventListener('click', () => {
+    const isDark = document.body.classList.toggle('dark');
+    localStorage.setItem('fb_dark', isDark);
+    updateDarkIcon();
+  });
+
+  function updateDarkIcon() {
+    const i = darkToggle.querySelector('i');
+    if (document.body.classList.contains('dark')) { i.classList.remove('bi-moon'); i.classList.add('bi-sun'); }
+    else { i.classList.remove('bi-sun'); i.classList.add('bi-moon'); }
+  }
+
+  // ---------- load metrics ----------
+  async function loadMetrics() {
+    try {
+      const data = await apiFetch('/metrics/'); // expects { notes_count, bookmarks_count, categories_count, last_synced }
+      metricNotes.textContent = data.notes_count ?? '0';
+      metricBookmarks.textContent = data.bookmarks_count ?? '0';
+      metricCategories.textContent = data.categories_count ?? '0';
+      metricSynced.textContent = data.last_synced ?? '—';
+    } catch (err) {
+      console.warn('Failed to load metrics', err);
+      metricNotes.textContent = '—';
+      metricBookmarks.textContent = '—';
+      metricCategories.textContent = '—';
+      metricSynced.textContent = '—';
+    }
+  }
+
+  // ---------- load chart ----------
+  async function loadChart() {
+    try {
+      const payload = await apiFetch('/analytics/notes_last_7/'); // { labels:[], data:[] }
+      const ctx = notesChartEl.getContext('2d');
+      // gradient fill
+      const grad = ctx.createLinearGradient(0, 0, 0, 200);
+      grad.addColorStop(0, getComputedStyle(document.documentElement).getPropertyValue('--accent-left') || '#00bfa6');
+      grad.addColorStop(1, getComputedStyle(document.documentElement).getPropertyValue('--accent-right') || '#007bff');
+
+      if (notesChart) notesChart.destroy();
+      notesChart = new Chart(ctx, {
         type: 'bar',
         data: {
-          labels: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
-          datasets: [{
-            label: 'Notes Added',
-            data: [5,9,7,11,4,6,8],
-            backgroundColor: gradient
-          }]
+          labels: payload.labels || ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
+          datasets: [{ data: payload.data || [0,0,0,0,0,0,0], backgroundColor: grad, borderRadius:6 }]
         },
-        options: { plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true } } }
+        options: { plugins:{ legend:{ display:false } }, scales:{ y:{ beginAtZero:true } } }
       });
+    } catch (err) {
+      console.warn('loadChart error', err);
     }
+  }
 
-    // Category Filter
-    const categoryFilter = document.getElementById('categoryFilter');
-    categoryFilter.addEventListener('change', function() {
-      const selected = this.value;
-      document.querySelectorAll('.note-item').forEach(item => {
-        item.style.display = (selected === 'all' || item.dataset.category === selected) ? '' : 'none';
+  // ---------- activity (table) ----------
+  async function loadActivity(page = 1) {
+    try {
+      currentActivityPage = page;
+      const res = await apiFetch(`/activity/?page=${page}`); // expected { count, page, page_size, results: [ {id,action,details,timestamp} ] }
+      const rows = (res.results || []);
+      activityBody.innerHTML = '';
+      if (!rows.length) {
+        activityBody.innerHTML = '<tr><td colspan="4" class="text-center text-muted py-4">No recent activity</td></tr>';
+      } else {
+        rows.forEach((r, i) => {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td class="text-muted">${((res.page-1) * (res.page_size || rows.length)) + i + 1}</td>
+            <td><strong>${escapeHtml(r.action || '')}</strong></td>
+            <td>${escapeHtml(r.details || '')}</td>
+            <td><small class="text-muted">${formatWhen(r.timestamp)}</small></td>
+          `;
+          activityBody.appendChild(tr);
+        });
+      }
+
+      // pager
+      lastActivityTotal = res.count ?? 0;
+      activityCount.textContent = (res.count ?? 0) + ' total';
+      renderPager(res.page ?? page, res.page_size ?? 10, res.count ?? 0);
+    } catch (err) {
+      console.error('loadActivity', err);
+      activityBody.innerHTML = '<tr><td colspan="4" class="text-danger text-center py-4">Failed to load activity</td></tr>';
+    }
+  }
+
+  function renderPager(page = 1, pageSize = 10, total = 0) {
+    activityPager.innerHTML = '';
+    const pages = Math.ceil(total / pageSize) || 1;
+    const makeItem = (p, label = null, disabled=false, active=false) => {
+      const li = document.createElement('li'); li.className = 'page-item' + (disabled? ' disabled':'') + (active? ' active':'');
+      const a = document.createElement('a'); a.className='page-link'; a.href='#'; a.textContent = label ?? p;
+      a.addEventListener('click', (ev) => { ev.preventDefault(); if (!disabled && page!==p) loadActivity(p); });
+      li.appendChild(a);
+      return li;
+    };
+    activityPager.appendChild(makeItem(Math.max(1, page-1), '‹', page<=1));
+    for (let p = 1; p <= pages; p++) {
+      if (pages > 7 && p>2 && p < pages-1 && Math.abs(p - page) > 1) {
+        if (!activityPager.querySelector('.ellipsis')) {
+          const li = document.createElement('li'); li.className='page-item disabled ellipsis';
+          const a = document.createElement('span'); a.className='page-link'; a.textContent='…';
+          li.appendChild(a); activityPager.appendChild(li);
+        }
+        continue;
+      }
+      activityPager.appendChild(makeItem(p, null, false, p===page));
+    }
+    activityPager.appendChild(makeItem(Math.min(pages, page+1), '›', page>=pages));
+  }
+
+  // ---------- announcements ----------
+  async function loadAnnouncements() {
+    try {
+      const items = await apiFetch('/announcements/'); // expected array of {id,title,body,created_at}
+      announcementsList.innerHTML = '';
+      if (!items || items.length===0) {
+        announcementsList.innerHTML = '<li class="text-muted">No announcements</li>';
+        return;
+      }
+      items.slice(0,5).forEach(a => {
+        const li = document.createElement('li');
+        li.innerHTML = `<strong>${escapeHtml(a.title || 'Update')}</strong><div class="text-muted small">${escapeHtml(a.body||'')}</div>`;
+        announcementsList.appendChild(li);
       });
-    });
-
-    // Form Submit
-    document.getElementById('noteForm').addEventListener('submit', e => {
-      e.preventDefault();
-      alert('Note saved!');
-      bootstrap.Modal.getInstance(document.getElementById('noteModal')).hide();
-    });
-
-    function deleteNote(id) {
-      if (confirm('Are you sure you want to delete this note?')) console.log('Deleting note', id);
+    } catch (err) {
+      announcementsList.innerHTML = '<li class="text-danger">Failed to load announcements</li>';
     }
+  }
+
+  // ---------- sync action ----------
+  document.getElementById('btnSync').addEventListener('click', async () => {
+    try {
+      document.getElementById('syncStatus').textContent = 'Syncing…';
+      await apiFetch('/sync/', { method: 'POST' }); // your backend sync endpoint
+      const t = new Date().toLocaleString();
+      document.getElementById('syncStatus').textContent = 'Last: ' + t;
+      // refresh metrics & activity
+      await Promise.all([ loadMetrics(), loadActivity(1), loadChart() ]);
+    } catch (err) {
+      document.getElementById('syncStatus').textContent = 'Sync failed';
+      console.error('sync', err);
+    }
+  });
+
+  // ---------- quick actions ----------
+  document.getElementById('btnAddNote').addEventListener('click', () => addNoteModal.show());
+  document.getElementById('fabAdd').addEventListener('click', () => addNoteModal.show());
+  document.getElementById('btnSavePost').addEventListener('click', () => window.location.href='bookmarks.html');
+  document.getElementById('btnManageTags').addEventListener('click', () => window.location.href='tags.html');
+
+  // ---------- add note form ----------
+  addNoteForm.addEventListener('submit', async (ev) => {
+    ev.preventDefault();
+    const title = document.getElementById('noteTitle').value.trim();
+    const body = document.getElementById('noteBody').value.trim();
+    const category = document.getElementById('noteCategorySelect').value || null;
+    if (!title || !body) return alert('Please add title and note body.');
+
+    try {
+      await apiFetch('/notes/', { method:'POST', body:{ title, text: body, category } });
+      addNoteModal.hide();
+      // refresh UI
+      await Promise.all([ loadMetrics(), loadActivity(1), loadChart() ]);
+      showToast('Note created');
+      addNoteForm.reset();
+    } catch (err) {
+      console.error('save note', err);
+      alert('Failed to save note.');
+    }
+  });
+
+  // ---------- helper: populate category select ----------
+  async function loadCategoriesIntoSelect() {
+    try {
+      const cats = await apiFetch('/categories/'); // expected array
+      const sel = document.getElementById('noteCategorySelect');
+      sel.innerHTML = '<option value="">— Select —</option>';
+      cats.forEach(c => {
+        const o = document.createElement('option'); o.value = c.id; o.textContent = c.name; sel.appendChild(o);
+      });
+    } catch (err) {
+      console.warn('load categories', err);
+    }
+  }
+
+  // ---------- small UI helpers ----------
+  function escapeHtml(s='') {
+    return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;');
+  }
+  function formatWhen(iso) {
+    if (!iso) return '—';
+    const d = new Date(iso);
+    return d.toLocaleString();
+  }
+  function showToast(msg) {
+    // small ephemeral notice, replaceable with nicer UI
+    const el = document.createElement('div');
+    el.textContent = msg;
+    el.style.position='fixed'; el.style.right='18px'; el.style.bottom='140px'; el.style.padding='.6rem .9rem';
+    el.style.background='rgba(0,0,0,.8)'; el.style.color='#fff'; el.style.borderRadius='8px'; el.style.zIndex='1300';
+    document.body.appendChild(el);
+    setTimeout(()=>el.remove(), 1800);
+  }
+
+  // ---------- initial load ----------
+  (async function init() {
+    try {
+      // populate UI from API
+      await Promise.all([ loadMetrics(), loadChart(), loadActivity(1), loadAnnouncements(), loadCategoriesIntoSelect() ]);
+
+      // populate nav user if /api/accounts/me/ exists
+      try {
+        const me = await apiFetch('/accounts/me/');
+        document.getElementById('navUsername').textContent = me.username || me.email || 'You';
+        if (me.profile_photo) document.getElementById('navAvatar').src = me.profile_photo;
+      } catch(e) { /* ignore if endpoint doesn't exist */ }
+
+    } catch (err) {
+      console.error('init error', err);
+    }
+  })();
+
+  // ---------- logout (simple) ----------
+  document.getElementById('logoutBtn').addEventListener('click', async (ev) => {
+    ev.preventDefault();
+    localStorage.removeItem('fb_access');
+    localStorage.removeItem('fb_refresh');
+    window.location.href = 'login.html';
+  });
+
   </script>
 </body>
 </html>
