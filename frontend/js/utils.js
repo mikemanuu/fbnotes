@@ -1,7 +1,7 @@
-// utils.js
-// Small helper functions used across pages
 
-const API_BASE = "http://127.0.0.1:8000/api"; // change if your API uses different host/port
+// Helper functions used across pages
+
+const API_BASE = "http://127.0.0.1:8000/api"; 
 
 export function saveTokens({ access, refresh }) {
   localStorage.setItem("fb_access", access);

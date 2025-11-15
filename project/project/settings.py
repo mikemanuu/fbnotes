@@ -34,6 +34,10 @@ INSTALLED_APPS = [
     'apps.tags',
     'apps.audit',
     'apps.pages',
+    'apps.analytics',
+    'apps.categories',
+    'apps.activity',
+    'apps.announcements',
 ]
 
 MIDDLEWARE = [
@@ -96,8 +100,8 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
     ),
     'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAuthenticated',),
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-    'PAGE_SIZE': 20,
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10,
 
     "DEFAULT_FILTER_BACKENDS": (
         "django_filters.rest_framework.DjangoFilterBackend",

@@ -1,6 +1,4 @@
-// auth.js
-
-import { saveTokens, clearTokens, getRefreshToken, authHeaders, apiFetch } from './utils.js';
+import { saveTokens, clearTokens, getRefreshToken, apiFetch } from './utils.js';
 
 // Base URL for Django API
 const API_BASE = "http://127.0.0.1:8000/api";
@@ -54,7 +52,7 @@ export async function loginUser({ username, password }) {
 }
 
 // Logout
-export function logoutLocal(redirect = "/login.html") {
+export function logoutLocal(redirect = "/index.html") {
   clearTokens();
   window.location.href = redirect;
 }

@@ -14,7 +14,7 @@ form.addEventListener('submit', async (e) => {
   const password = document.getElementById('password').value;
   try {
     const tokens = await loginUser({ username, password });
-    window.location.href = 'notes.html';
+    window.location.href = 'dashboard.html';
   } catch (err) {
     console.error(err);
     if (err && err.data) {

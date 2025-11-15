@@ -12,7 +12,11 @@ urlpatterns = [
     path("api/tags/", include("apps.tags.urls")),
     path("api/accounts/", include("apps.accounts.urls")),
     path("api/audit/", include("apps.audit.urls")),
-    path('api/contact', include('apps.pages.urls')),
+    path("api/contact/", include('apps.pages.urls')),
+    path("api/announcements/", include("apps.announcements.urls")),
+    path("api/activity/", include("apps.audit.urls")),
+    path("api/categories/", include("apps.tags.urls")),
+    path("api/analytics/", include("apps.analytics.urls")),
 
 
     # DRF browsable auth (session login)

@@ -21,6 +21,7 @@
 
       <div class="collapse navbar-collapse" id="navbarContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="dashboard.html">Dashboard</a></li>
           <li class="nav-item"><a class="nav-link" href="bookmarks.html">Bookmarks</a></li>
           <li class="nav-item"><a class="nav-link" href="notes.html">Notes</a></li>
         </ul>
@@ -34,8 +35,8 @@
         <!-- User Dropdown -->
         <div class="dropdown">
           <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle" id="userMenu" data-bs-toggle="dropdown" aria-expanded="false">
-            <img id="userPhoto" src="https://via.placeholder.com/40" alt="User" class="rounded-circle me-2" width="40" height="40">
-            <strong id="userName">User</strong>
+            <img id="navAvatar" src="https://via.placeholder.com/40" alt="User" class="rounded-circle me-2" width="40" height="40">
+            <strong id="navUsername">User</strong>
           </a>
           <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="userMenu">
             <li><a class="dropdown-item" href="#">Profile</a></li>
@@ -49,51 +50,63 @@
   </nav>
 
   <!-- Bookmarks Section -->
-  <div class="container py-4">
-  <div class="d-flex justify-content-between align-items-center mb-3">
-    <h3>Your bookmarks</h3>
-    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addBookmarkModal">
-      <i class="bi bi-plus"></i> Add Bookmark
-    </button>
-  </div>
+  <div class="container mt-4">
+  <h2>Your Bookmarks</h2>
 
-  <div id="bookmarks-list" class="row gy-3"></div>
+  <button id="addBookmarkBtn" class="btn btn-primary mb-3">Add New Bookmark</button>
+
+  <!-- Bookmarks list -->
+  <div id="bookmarksList"></div>
 </div>
 
-<!-- Add Bookmark Modal -->
-<div class="modal fade" id="addBookmarkModal" tabindex="-1" aria-hidden="true">
+<!-- Modal: Add/Edit Bookmark -->
+<div class="modal" id="bookmarkModal">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form id="addBookmarkForm">
-        <div class="modal-header">
-          <h5 class="modal-title">Add New Bookmark</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-        </div>
-        <div class="modal-body">
-          <div class="mb-3">
-            <label class="form-label">Title</label>
-            <input type="text" id="bm-title" class="form-control" required>
-          </div>
-          <div class="mb-3">
-            <label class="form-label">URL</label>
-            <input type="url" id="bm-url" class="form-control" required>
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Description</label>
-            <textarea id="bm-desc" class="form-control" rows="2"></textarea>
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Tags (comma separated)</label>
-            <input type="text" id="bm-tags" class="form-control">
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-primary">Save</button>
-        </div>
-      </form>
+      <div class="modal-header">
+        <h5 class="modal-title" id="bookmarkModalTitle">Add Bookmark</h5>
+      </div>
+
+      <div class="modal-body">
+        <input type="hidden" id="bookmarkId">
+
+        <label for="bookmarkTitle" class="form-label">Title:</label>
+        <input 
+          type="text" 
+          id="bookmarkTitle" 
+          class="form-control mb-4" 
+          placeholder="Title"
+          required>
+
+        <label for="bookmarkUrl" class="form-label font-bold">URL Link:</label>  
+        <input 
+          type="url" 
+          id="bookmarkUrl" 
+          class="form-control mb-4" 
+          placeholder="https://example.com"
+          required>
+
+
+        <label for="bookmarkDescription" class="form-label font-bold">Description:</label>
+        <textarea 
+          id="bookmarkDescription" 
+          class="form-control" 
+          placeholder="Description (optional)">
+        </textarea>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button class="btn btn-primary" id="saveBookmarkBtn">Save</button>
+      </div>
     </div>
   </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script type="module" src="./js/utils.js"></script>
+<script type="module" src="./js/auth.js"></script>
+<script type="module" src="./js/navbar.js"></script>
 
 
   <script type="module">
@@ -106,47 +119,7 @@
     const logoutBtn = document.getElementById('logoutBtn');
     if (logoutBtn) logoutBtn.addEventListener('click', () => logoutLocal('/'));
 
-    const container = document.getElementById('bookmarks-list');
-    const searchInput = document.getElementById('searchInput');
-    const searchForm = document.getElementById('searchForm');
-
-    let bookmarks = [];
-
-    async function loadBookmarks() {
-      try {
-        const data = await apiFetch('/bookmarks/');
-        bookmarks = data;
-        displayBookmarks(bookmarks);
-      } catch (err) {
-        console.error(err);
-        container.innerHTML = '<p class="text-danger">Failed to load bookmarks.</p>';
-      }
-    }
-
-    function displayBookmarks(list) {
-      container.innerHTML = '';
-      if (!list.length) {
-        container.innerHTML = '<p class="text-muted">No bookmarks found.</p>';
-        return;
-      }
-
-      list.forEach(b => {
-        const col = document.createElement('div');
-        col.className = 'col-md-6 col-lg-4';
-        col.innerHTML = `
-          <div class="card shadow-sm h-100">
-            <div class="card-body">
-              <h5 class="card-title">${b.title}</h5>
-              <p class="card-text">${b.description || ''}</p>
-              <a href="${b.url}" target="_blank" class="text-decoration-none">${b.url}</a>
-              <div class="mt-2"><small class="text-muted">Tags: ${(b.tags || []).map(t => t.name).join(', ')}</small></div>
-            </div>
-          </div>
-        `;
-        container.appendChild(col);
-      });
-    }
-
+    
     // Search filtering
     searchForm.addEventListener('submit', e => {
       e.preventDefault();
@@ -159,33 +132,8 @@
       displayBookmarks(filtered);
     });
 
-    loadBookmarks();
-
-  const addBookmarkForm = document.getElementById('addBookmarkForm');
-    addBookmarkForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-  const title = document.getElementById('bm-title').value.trim();
-  const url = document.getElementById('bm-url').value.trim();
-  const description = document.getElementById('bm-desc').value.trim();
-  const tags = document.getElementById('bm-tags').value.split(',').map(t => t.trim()).filter(Boolean);
-
-  try {
-    await apiFetch('/bookmarks/', {
-      method: 'POST',
-      body: { title, url, description, tags }
-    });
-    const modal = bootstrap.Modal.getInstance(document.getElementById('addBookmarkModal'));
-    modal.hide();
-    addBookmarkForm.reset();
-    await loadBookmarks();
-  } catch (err) {
-    console.error(err);
-    alert('Failed to add bookmark.');
-  }
-});
-
   </script>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+

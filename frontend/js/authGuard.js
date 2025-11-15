@@ -8,7 +8,7 @@ export async function ensureAuthenticated() {
     return;
   }
 
-  // try a small API call to verify token validity
+  // try API call to verify token validity
   try {
     const res = await fetch(`${location.origin}/api/accounts/me/`, {
       headers: { "Authorization": `Bearer ${access}` }
@@ -30,3 +30,15 @@ export async function ensureAuthenticated() {
     logoutLocal('/login.html');
   }
 }
+/*
+export function ensureAuthenticated() {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+        window.location.href = "/login.html";
+        return false;
+    }
+
+    return true;
+}
+*/
