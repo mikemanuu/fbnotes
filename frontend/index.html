@@ -9,7 +9,7 @@
   <meta property="og:title" content="fbnotes — Save & organize Facebook posts">
   <meta property="og:description" content="Clip Facebook posts, attach notes, tag them and search later. Lightweight and private.">
   <meta property="og:image" content="https://via.placeholder.com/1200x630.png?text=fbnotes">
-  <meta property="og:url" content="https://yourdomain.example/">
+  <meta property="og:url" content="https://fbnotes.com/">
   <meta name="twitter:card" content="summary_large_image">
 
   <!-- Bootstrap CSS -->
@@ -278,7 +278,7 @@
         </div>
       </div>
 
-      <!-- Column 3 (optional future content) -->
+      <!-- Column 3  -->
       <div class="col-12 col-md-6 text-md-end">
         <h6 class="fw-bold text-uppercase small mb-3">Newsletter</h6>
         <form class="d-flex flex-column flex-sm-row gap-2">
@@ -360,7 +360,6 @@
         const token = getAccessToken();
         if (!token) return;
         await apiFetch('/accounts/me/');
-        // authenticated — send to dashboard
         window.location.href = 'dashboard.html';
       } catch (err) {
         console.debug('No valid token or not authenticated; staying on landing.', err);

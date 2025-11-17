@@ -8,85 +8,14 @@
   <!-- Bootstrap & Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
-
+  <link href="css/dashboard.css" rel="stylesheet">
   <!-- Chart.js (defer) -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js" defer></script>
 
-  <style>
-    :root{
-      --accent-left:#00bfa6;
-      --accent-right:#007bff;
-      --gradient: linear-gradient(90deg,var(--accent-left),var(--accent-right));
-      --sidebar-width:240px;
-    }
+   <!-- AOS (Animate on Scroll) -->
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
 
-    html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;}
-    body{background:#f6f8fb;color:#0f1720;transition:background .2s,color .2s;}
 
-    /* Sidebar */
-    .sidebar{
-      width:var(--sidebar-width); height:100vh; position:fixed; top:0; left:0;
-      background:#fff; border-right:1px solid #e6e9ee; padding:1rem; box-shadow:0 6px 18px rgba(10,10,10,.03);
-      transition:transform .28s cubic-bezier(.2,.9,.3,1); z-index:1100; overflow:auto;
-    }
-    .sidebar.hidden{ transform: translateX(-120%); }
-    .brand { display:flex; align-items:center; justify-content:space-between; gap:.6rem; margin-bottom:.6rem;}
-    .brand h4{ margin:0; color:var(--accent-right); font-weight:700;}
-    .close-x{ background:none;border:none;font-size:1.2rem;color:#333;cursor:pointer; }
-
-    .nav-link{ color:#24303a; margin:.25rem 0; border-radius:.5rem; padding:.5rem .75rem; display:flex; align-items:center; gap:.6rem;}
-    .nav-link:hover, .nav-link.active{ background:var(--gradient); color:#fff; }
-
-    /* Main */
-    .main{ margin-left:var(--sidebar-width); transition:margin-left .28s; min-height:100vh; padding:1.1rem; }
-    .sidebar.hidden ~ .main{ margin-left:0; }
-
-    .topbar{ display:flex; align-items:center; gap:.75rem; background:#fff; padding:.6rem .9rem; border-radius:.6rem; box-shadow:0 2px 6px rgba(12,18,24,.03); border:1px solid #eef2f6;}
-    .hamburger{ background:none;border:none;font-size:1.15rem; cursor:pointer; color:#24303a; }
-    .topbar .search { flex:1; max-width:580px; }
-
-    .card{ border-radius:12px; border:none; box-shadow:0 1px 6px rgba(8,12,20,.04); }
-    .stats-card{ padding:1rem; }
-    .stats-card h6{ color:#6b7280; margin:0; font-size:.9rem;}
-    .stats-card h3{ margin:.3rem 0; font-size:1.6rem; font-weight:700; }
-
-    .chart-card{ padding:1rem; }
-
-    .section-title { display:flex; justify-content:space-between; align-items:center; gap:.6rem; margin-bottom:.6rem; }
-    .cards-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap:1rem; }
-
-    /* Cards for items */
-    .item-card .meta { font-size:.85rem; color:#64748b; }
-    .item-card .title { font-weight:700; margin-bottom:.35rem; }
-
-    .activity-table thead th{ font-weight:700; font-size:.9rem; border-bottom:1px solid #eef2f6; color:#344054; }
-    .activity-table tbody td{ padding:.65rem .75rem; vertical-align:middle; }
-
-    /* quick actions area */
-    .quick-actions .btn { border-radius:8px; }
-
-    /* floating fab */
-    .fab{ position:fixed; right:20px; bottom:86px; width:56px; height:56px; border-radius:50%; background:var(--gradient); color:#fff; border:none; display:flex; align-items:center; justify-content:center; box-shadow:0 10px 30px rgba(2,6,23,.12); z-index:1200; cursor:pointer; }
-
-    /* bottom nav (mobile) */
-    .bottom-nav{ display:none; position:fixed; left:0; right:0; bottom:0; background:#fff; border-top:1px solid #e6e9ee; z-index:1200; padding:.4rem .6rem; justify-content:space-around; }
-    .bottom-nav a{ text-decoration:none; color:#24303a; font-size:.85rem; display:flex; flex-direction:column; align-items:center; gap:.2rem; }
-
-    /* dark mode */
-    body.dark{ background:#041026; color:#e6eef6; }
-    body.dark .sidebar{ background:#071026; border-color:#071026; }
-    body.dark .card{ background:#071026; color:#dbeafe; box-shadow:none; }
-    body.dark .topbar{ background:#071026; border-color:#071026; }
-
-    /* responsive */
-    @media (max-width:992px){
-      .sidebar{ transform:translateX(-120%); }
-      .sidebar.show{ transform:translateX(0); }
-      .main{ margin-left:0; padding:.8rem; }
-      .bottom-nav{ display:flex; }
-      .topbar .search{ display:none; }
-    }
-  </style>
 </head>
 <body>
 
@@ -102,7 +31,7 @@
       <li class="nav-item"><a class="nav-link" href="bookmarks.html"><i class="bi bi-bookmark"></i> Bookmarks</a></li>
       <li class="nav-item"><a class="nav-link" href="notes.html"><i class="bi bi-journal-text"></i> Notes</a></li>
       <li class="nav-item"><a class="nav-link" href="tags.html"><i class="bi bi-tags"></i> Tags</a></li>
-      <li class="nav-item"><a class="nav-link" href="about.html"><i class="bi bi-info-circle"></i> About</a></li>
+      <li class="nav-item"><a class="nav-link" href="settings.html"><i class="bi bi-gear"></i> Settings</a></li>
     </ul>
   </nav>
 
@@ -251,9 +180,9 @@
           <div class="card p-3">
             <h6>Quick actions</h6>
             <div class="d-grid gap-2 mt-2">
-              <button id="addNoteBtn" class="btn btn-primary"><i class="bi bi-plus-lg me-2"></i>Add note</button>
-              <button id="addBookmarkBtn" class="btn btn-outline-primary"><i class="bi bi-bookmark-plus me-2"></i>Save post</button>
-              <button id="manageTagsBtn" class="btn btn-outline-secondary"><i class="bi bi-tags me-2"></i>Manage categories</button>
+              <button id="addNoteBtn" class="btn btn-brand"><i class="bi bi-plus-lg me-2"></i>Add note</button>
+              <button id="addBookmarkBtn" class="btn  btn-outline-accent btn-outline-brand"><i class="bi bi-bookmark-plus me-2"></i>Save post</button>
+              <button id="manageTagsBtn" class="btn btn-outline-accent btn-outline-brand"><i class="bi bi-tags me-2"></i>Manage categories</button>
             </div>
           </div>
 
@@ -261,7 +190,7 @@
       </div>
 
       <!-- Announcements -->
-      <div class="row g-3 mt-3">
+      <div class="row g-3 mt-3 mb-5">
         <div class="col-12">
           <div class="card p-3">
             <div class="d-flex justify-content-between">
@@ -276,7 +205,7 @@
       </div>
 
       <!-- Floating FAB -->
-      <button id="fabAdd" class="fab" title="Quick add"><i class="bi bi-pencil-fill fs-5"></i></button>
+      <button id="fabAdd" class="fab btn-brand" title="Quick add"><i class="bi bi-pencil-fill fs-5"></i></button>
 
     </div>
   </main>
@@ -308,7 +237,7 @@
         </div>
         <div class="modal-footer">
           <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Cancel</button>
-          <button class="btn btn-primary" type="submit">Save</button>
+          <button class="btn btn-brand" type="submit">Save</button>
         </div>
       </form>
     </div>
@@ -317,6 +246,7 @@
   <!-- BOOTSTRAP JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
   <script src="/js/api.js" type="module"></script>
   <script src="/js/dashboardLoaders.js" type="module"></script>
   <script src="/js/dashboard.js" type="module"></script>
@@ -327,6 +257,10 @@
 
   <!-- Dashboard JS -->
   <script>
+
+  // AOS init
+  AOS.init({ once: true, duration: 600 });
+
     /* ===== UI elements ===== */
   const sidebar = document.getElementById('sidebar'), closeSidebar = document.getElementById('closeSidebar'), openSidebar = document.getElementById('openSidebar');
   const darkToggle = document.getElementById('darkToggle'), navUsername = document.getElementById('navUsername'), navAvatar = document.getElementById('navAvatar');

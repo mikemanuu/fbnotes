@@ -52,7 +52,7 @@ export async function loginUser({ username, password }) {
 }
 
 // Logout
-export function logoutLocal(redirect = "/index.html") {
+export function logoutLocal(redirect = "http://127.0.0.1:5500/frontend/index.html") {
   clearTokens();
   window.location.href = redirect;
 }
