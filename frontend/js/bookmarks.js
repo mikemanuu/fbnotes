@@ -1,4 +1,5 @@
 const bookmarksApi = "http://127.0.0.1:8000/api/bookmarks/";
+import { apiFetch } from "./utils";
 
 // DOM elements
 const bookmarksList = document.getElementById("bookmarksList");
@@ -80,6 +81,7 @@ saveBookmarkBtn.addEventListener("click", () => {
   id ? updateBookmark(id, payload) : createBookmark(payload);
 });
 
+// Create bookmark
 function createBookmark(payload) {
   apiFetch(bookmarksApi, {
     method: "POST",
@@ -94,6 +96,7 @@ function createBookmark(payload) {
     .catch(err => console.error("Create bookmark error:", err));
 }
 
+// Edit bookmark
 function editBookmark(id) {
   apiFetch(`${bookmarksApi}${id}/`)
     .then(res => res.json())
@@ -108,8 +111,9 @@ function editBookmark(id) {
     .catch(err => console.error("Fetch bookmark error:", err));
 }
 
+// Update bookmark
 function updateBookmark(id, payload) {
-  apiFfetch(`${bookmarksApi}${id}/`, {
+  apiFetch(`${bookmarksApi}${id}/`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload)
@@ -122,6 +126,7 @@ function updateBookmark(id, payload) {
     .catch(err => console.error("Update error:", err));
 }
 
+// Delete bookmark
 function deleteBookmark(id) {
   if (!confirm("Delete bookmark?")) return;
 

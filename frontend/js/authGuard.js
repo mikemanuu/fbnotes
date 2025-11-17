@@ -1,10 +1,11 @@
 // js/authGuard.js
-import { getAccessToken, refreshAccessToken, logoutLocal } from './utils.js';
+import { refreshAccessToken, logoutLocal } from './auth.js';
+import { getAccessToken } from './utils.js';
 
 export async function ensureAuthenticated() {
   let access = getAccessToken();
   if (!access) {
-    logoutLocal('/login.html');
+    logoutLocal('http://127.0.0.1:5500/frontend/index.html');
     return;
   }
 
@@ -20,14 +21,14 @@ export async function ensureAuthenticated() {
         await refreshAccessToken();
       } catch (err) {
         console.error("Token refresh failed:", err);
-        logoutLocal('/login.html');
+        logoutLocal('http://127.0.0.1:5500/frontend/index.html');
       }
     } else if (!res.ok) {
       throw new Error(`Auth check failed: ${res.status}`);
     }
   } catch (err) {
     console.error(err);
-    logoutLocal('/login.html');
+    logoutLocal('http://127.0.0.1:5500/frontend/index.html');
   }
 }
 /*
