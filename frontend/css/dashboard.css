@@ -27,6 +27,17 @@
       border: none;
     }
 
+    #navUsername {
+      color: var(--teal);
+    }
+
+    #navAvatar {
+      object-fit: cover;
+      border: 1px solid #ddd;
+      transition: border-color 0.2s;
+      padding: 0 5px 0 5px;
+}
+
     .btn-outline-accent {
       color: var(--navy);
       border-color: rgba(11,18,32,0.08);
@@ -102,5 +113,5 @@
       .sidebar.show{ transform:translateX(0); }
       .main{ margin-left:0; padding:.8rem; }
       .bottom-nav{ display:flex; }
-      .topbar .search{ display:none; }
+      .topbar .search { flex:1; max-width:230px; }
     }

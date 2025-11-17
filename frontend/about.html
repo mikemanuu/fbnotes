@@ -40,7 +40,7 @@
   </nav>
 
   <!-- About Section -->
-  <section class="py-5 fade-in text-center text-md-start">
+  <section class="py-5 fade-in text-center text-md-start" data-aos="fade-up">
     <div class="container">
       <div class="row align-items-center">
         <div class="col-md-6 mb-4 mb-md-0">
@@ -61,17 +61,17 @@
   </section>
 
   <!-- Team Section -->
-  <section class="py-5 fade-in" id="team">
+  <section class="py-5 fade-in" id="team" data-aos="fade-up">
     <div class="container text-center">
-      <h3 class="fw-bold mb-4">Meet the Creator</h3>
+      <h3 class="fw-bold mb-4" data-aos="fade-up">Meet the Creator</h3>
       <div class="row justify-content-center">
         <div class="col-md-4">
           <div class="card border-0 shadow-sm">
             <div class="card-body">
               <img src="assets/images/manuu passport.jpg" alt="Emmanuel Rotich" class="rounded-circle mb-3 shadow-sm">
-              <h5 class="fw-semibold mb-1">Emmanuel Rotich</h5>
+              <h5 class="fw-semibold mb-1" data-aos="fade-up">Emmanuel Rotich</h5>
               <p class="text-muted mb-2">Founder & Developer</p>
-              <p class="small">
+              <p class="small" data-aos="fade-up">
                 Emmanuel is a passionate software engineer who built fbnotes to make saving and organizing Facebook content effortless. 
                 He handles both the design and backend development of the app.
               </p>
@@ -88,10 +88,10 @@
   </section>
 
   <!-- CTA Section -->
-  <section class=" cta-section py-5 text-white text-center">
+  <section class=" cta-section py-5 fade-in text-center" data-aos="fade-up">
     <div class="container">
-      <h4 class="fw-bold mb-3">Start organizing your Facebook content today.</h4>
-      <a href="signup.html" class="btn-cta btn-light btn-lg px-4">Get Started</a>
+      <h4 class="fw-bold mb-3" data-aos="fade-up">Start organizing your Facebook content today.</h4>
+      <a href="signup.html" class="btn-cta btn-light btn-lg px-4" data-aos="fade-up">Get Started</a>
     </div>
   </section>
 
@@ -158,6 +158,9 @@
   <script>
     // copy year
     document.getElementById("copyYear").textContent = new Date().getFullYear();
+
+    // AOS init
+    AOS.init({ once: true, duration: 600 });
 
     // Auto-detect dark mode
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;

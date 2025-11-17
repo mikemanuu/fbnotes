@@ -157,7 +157,9 @@
      .contact-info i { color: var(--bs-primary); font-size: 1.4rem; margin-right: 8px; }
      .map-container { height: 350px; border-radius: 10px; overflow: hidden; }
 
-    /* === ABOUT PAGE ENHANCEMENTS === */
+
+     
+    /* === ABOUT PAGE STYLING === */
 
     /* General layout */
     section {
