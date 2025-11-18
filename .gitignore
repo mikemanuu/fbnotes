@@ -17,6 +17,7 @@ venv/
 *.pyc
 *.egg-info
 docker-compose.override.yml
+.env.production
 
 # IDEs
 .vscode/
