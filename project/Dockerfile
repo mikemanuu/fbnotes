@@ -20,8 +20,15 @@ RUN pip install --upgrade pip && pip install -r requirements.txt
 # Copy the Django project folder (the one containing manage.py)
 COPY . /app/
 
+# Collect static files
+RUN python manage.py collectstatic --noinput
+
 # Expose Django port
 EXPOSE 8000
 
 # Default command to run Django server
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+#CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+
+
+ # Start the app with gunicorn
+CMD ["gunicorn", "fbnotes.wsgi:application", "--bind", "0.0.0.0:8000"]

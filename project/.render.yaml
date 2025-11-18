@@ -1,6 +1,27 @@
 services:
   - type: web
     name: fbnotes
-    env: python
-    buildCommand: "pip install -r requirements.txt && python manage.py collectstatic --noinput"
-    startCommand: "gunicorn fbnotes.wsgi --bind 0.0.0.0:$PORT"
+    env: docker
+    branch: main
+    dockerfilePath: ./Dockerfile
+    plan: free
+    autoDeploy: true
+    envVars:
+      - key: SECRET_KEY
+        fromDatabase: false
+        value: "im9$0+-ch7*c1c+x1(w*hvonv()5hhi#@87r!@-($$s5u8h@y%"
+      - key: DEBUG
+        fromDatabase: false
+        value: "False"
+      - key: DB_NAME
+        fromDatabase: false
+        value: "fbnotes_db"
+      - key: DB_USER
+        fromDatabase: false
+        value: "root"
+      - key: DB_PASSWORD
+        fromDatabase: false
+        value: "Mike4005!"
+      - key: DB_HOST
+        fromDatabase: false
+        value: "3306"
