@@ -31,15 +31,14 @@ export async function ensureAuthenticated() {
     logoutLocal('http://127.0.0.1:5500/frontend/index.html');
   }
 }
-/*
+
 export function ensureAuthenticated() {
     const token = localStorage.getItem("token");
 
     if (!token) {
-        window.location.href = "/login.html";
+        window.location.href = "/index.html";
         return false;
     }
 
     return true;
 }
-*/
