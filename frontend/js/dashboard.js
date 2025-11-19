@@ -5,7 +5,7 @@ import {
     loadAnnouncements,
     loadCategories,
     loadAnalyticsChart
-} from "./dashboardLoaders.js";
+} from "./dashboardLoader.js";
 
 ensureAuthenticated();
 
