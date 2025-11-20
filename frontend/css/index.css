@@ -118,6 +118,10 @@
     @media (max-width: 576px) {
       .hero { padding: 3rem 0; }
       .feature-card { min-height: 140px; }
+
+      .hero-gallery img {
+        max-width: 100%;
+      }
     }
 
     a.muted { color: var(--muted); text-decoration: none; }
@@ -230,11 +234,6 @@
     }
 
     /* Dark Mode Styling */
-    body.dark-mode {
-      background-color: #121212;
-      color: #e4e4e4;
-    }
-
     body.dark-mode .bg-light {
       background-color: #1e1e1e !important;
     }
