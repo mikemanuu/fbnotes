@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="theme-light">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -31,7 +31,7 @@
     <div class="container">
       <a class="navbar-brand fw-bold" href="index.html" aria-label="fbnotes home">fbnotes</a>
 
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain" aria-label="Toggle navigation" aria-controls="navMain" aria-expanded="false">
         <span class="navbar-toggler-icon"></span>
       </button>
 
@@ -56,7 +56,7 @@
   </nav>
 
   <!-- Hero -->
-  <header class="hero">
+  <section class="hero">
     <div class="container">
       <div class="row align-items-center gy-4">
         <div class="col-lg-6" data-aos="fade-up">
@@ -76,18 +76,24 @@
         </div>
 
         <div class="col-lg-6" data-aos="fade-left">
-          <div class="d-flex gap-3 hero-gallery">
+          <div class="d-flex gap-3 hero-gallery flex-column flex-lg-row">
             <div class="screenshot flex-fill">
-              <img src="assets/images/screenshot-bookmarks.svg" alt="Bookmarks preview" class="img-fluid rounded">
+              <figure>
+                <link rel="preload" as="image" href="assets/images/screenshot-bookmarks.svg">
+                <img src="assets/images/screenshot-bookmarks.svg" alt="Screenshot of the fbnotes bookmarks interface." class="img-fluid rounded">
+              </figure>
             </div>
             <div class="screenshot flex-fill">
-              <img src="assets/images/screenshot-notes.svg" alt="Notes preview" class="img-fluid rounded">
+              <figure>
+                <link rel="preload" as="image" href="assets/images/screenshot-notes.svg">
+              <img src="assets/images/screenshot-notes.svg" alt="Screenshot of the fbnotes notes interface." class="img-fluid rounded">
+              </figure>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </header>
+  </section>
 
   <!-- Features -->
   <section id="features" class="py-5">
@@ -119,7 +125,7 @@
   </section>
 
   <!-- CTA -->
-  <section class="py-5">
+  <section class="py-5" id="cta">
     <div class="container">
       <div class="cta-bar" data-aos="zoom-in">
         <h4 class="mb-1">Ready to keep the posts you care about?</h4>
@@ -136,22 +142,30 @@
       <div class="row g-3">
         <div class="col-sm-6 col-md-3" data-aos="fade-up" data-aos-delay="40">
           <div class="screenshot">
-            <img src="assets/images/screenshot-dashboard.svg" alt="Dashboard preview" class="img-fluid rounded">
+            <figure>
+            <img loading="lazy" src="assets/images/screenshot-dashboard.svg" alt="Screenshot of the fbnotes dashboard interface." class="img-fluid rounded">
+            </figure>
           </div>
         </div>
         <div class="col-sm-6 col-md-3" data-aos="fade-up" data-aos-delay="80">
           <div class="screenshot">
-            <img src="assets/images/screenshot-bookmarks.svg" alt="Bookmarks preview" class="img-fluid rounded">
+            <figure>
+            <img loading="lazy" src="assets/images/screenshot-bookmarks.svg" alt="Screenshot of the fbnotes bookmarks interface." class="img-fluid rounded">
+            </figure>
           </div>
         </div>
         <div class="col-sm-6 col-md-3" data-aos="fade-up" data-aos-delay="120">
           <div class="screenshot">
-            <img src="assets/images/screenshot-notes.svg" alt="Notes preview" class="img-fluid rounded">
+            <figure>
+            <img loading="lazy" src="assets/images/screenshot-notes.svg" alt="Screenshot of the fbnotes notes interface." class="img-fluid rounded">
+            </figure>
           </div>
         </div>
         <div class="col-sm-6 col-md-3" data-aos="fade-up" data-aos-delay="160">
           <div class="screenshot">
-            <img src="assets/images/screenshot-moblie.svg" alt="Mobile preview" class="img-fluid rounded">
+            <figure>
+            <img src="assets/images/screenshot-moblie.svg" alt="Screenshot of the fbnotes in Mobile view" class="img-fluid rounded">
+            </figure>
           </div>
         </div>
       </div>
@@ -255,7 +269,7 @@
       <div class="col-6 col-md-3">
         <h6 class="fw-bold text-uppercase small mb-3">Important</h6>
         <ul class="list-unstyled small">
-          <li><a href=index.html" class="text-decoration-none text-muted">Home</a></li>
+          <li><a href="index.html" class="text-decoration-none text-muted">Home</a></li>
           <li><a href="about.html" class="text-decoration-none text-muted">About</a></li>
           <li><a href="contact.html" class="text-decoration-none text-muted">Contact</a></li>
           <li><a href="privacy.html" class="text-decoration-none text-muted">Privacy</a></li>
@@ -266,13 +280,13 @@
       <div class="col-6 col-md-3">
         <h6 class="fw-bold text-uppercase small mb-3">Follow</h6>
         <div class="d-flex flex-wrap gap-3">
-          <a href="https://twitter.com/your" target="_blank" class="text-muted fs-5" aria-label="Twitter">
+          <a href="https://twitter.com/mikemanuu" target="_blank" class="text-muted fs-5" aria-label="Twitter" rel="noopener noreferrer">
             <i class="bi bi-twitter"></i>
           </a>
-          <a href="https://www.linkedin.com/in/your" target="_blank" class="text-muted fs-5" aria-label="LinkedIn">
+          <a href="https://www.linkedin.com/in/rotich-emmanuel-14ba25188" target="_blank" class="text-muted fs-5" aria-label="LinkedIn" rel="noopener noreferrer">
             <i class="bi bi-linkedin"></i>
           </a>
-          <a href="https://github.com/your" target="_blank" class="text-muted fs-5" aria-label="GitHub">
+          <a href="https://github.com/mikemanuu" target="_blank" class="text-muted fs-5" aria-label="GitHub" rel="noopener noreferrer">
             <i class="bi bi-github"></i>
           </a>
         </div>
@@ -281,9 +295,9 @@
       <!-- Column 3  -->
       <div class="col-12 col-md-6 text-md-end">
         <h6 class="fw-bold text-uppercase small mb-3">Newsletter</h6>
-        <form class="d-flex flex-column flex-sm-row gap-2">
+        <form class="d-flex flex-column flex-sm-row flex-wrap: wrap gap-2">
           <input type="email" class="form-control form-control-sm" placeholder="Your email" />
-          <button type="submit" class="btn btn-sm btn-brand">Subscribe</button>
+          <button type="submit" class="btn btn-sm btn-brand" action="#">Subscribe</button>
         </form>
       </div>
 
@@ -303,10 +317,7 @@
     <i class="bi bi-arrow-up-short fs-4"></i>
   </button>
 
-  <!-- Bootstrap JS bundle -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-  <!-- AOS script -->
   <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
 
   <!-- Page scripts -->
