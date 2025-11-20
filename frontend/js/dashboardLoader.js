@@ -55,7 +55,7 @@ export async function loadAnnouncements() {
 }
 
 
-// 4. CATEGORIES (for filters and modal forms)
+// 4. CATEGORIES, for filters and modal forms
 export async function loadCategories() {
     const select = document.getElementById("categoryFilter");
     const modalSelect = document.getElementById("noteCategory");
